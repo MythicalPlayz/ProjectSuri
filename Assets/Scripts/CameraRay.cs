@@ -7,9 +7,11 @@ public class CameraRay : MonoBehaviour
     [SerializeField] private Camera CAM;
     private GameObject holding;
     private Vector3 screenCenter;
+    private GameManager gameManager;
     void Start()
     {
         screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
     }
 
     private void FixedUpdate()
@@ -21,25 +23,31 @@ public class CameraRay : MonoBehaviour
     void Update()
     {
         
-        Ray ray = CAM.ScreenPointToRay(screenCenter); //camera.gameObject.transform.position
+        Ray ray = CAM.ScreenPointToRay(screenCenter);
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Consumeable") && (holding == null || holding != hit.collider.gameObject))
+            if (hit.collider.gameObject.CompareTag("Consumeable") || hit.collider.gameObject.CompareTag("Interactable"))
             {
-                if (holding != null)
-                {
-                    Debug.Log("Dropping: " + holding.name);
-                    holding.GetComponent<Outline>().enabled = false;
-                }
+              
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
                 holding = hit.collider.gameObject;
-                holding.GetComponent<Outline>().enabled = true;
-            }
                 
+            }
+            else
+            {
+                holding = null;
+            }
+            UpdateObject();
+            gameManager.ChangeHighlightedObject(holding);
         }
+    }
+
+    void UpdateObject()
+    {
+        gameObject.GetComponent<PlayerInteract>().selectedGameObject = holding;
     }
 }
