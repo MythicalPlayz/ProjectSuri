@@ -22,6 +22,8 @@ public class PlayerInteract : MonoBehaviour
         bool interact = interactAction.WasPressedThisFrame();
         if (interact)
         {
+            if (selectedGameObject == null)
+                return;
             if (selectedGameObject.CompareTag("Consumeable"))
             {
                 if (holding)
@@ -41,23 +43,33 @@ public class PlayerInteract : MonoBehaviour
                     case GameManager.InteractableType.Register:
                         break;
                     case GameManager.InteractableType.SuriHolder:
-                        break;
                     case GameManager.InteractableType.PotatoFreezer:
-                        break;
                     case GameManager.InteractableType.ChickenFreezer:
+
+                        if (holding != null)
+                            return;
+                        holding = selectedGameObject.GetComponent<ItemGiver>().GiveItem(hand);
                         break;
+
+
                     case GameManager.InteractableType.Fryer:
+
+                        if (holding == null || !holding.CompareTag("FrozenFood"))
+                            return;
+                            selectedGameObject.GetComponent<Fryer>().FryFood(holding);
                         break;
 
 
 
-                    case GameManager.InteractableType.SuriMaker:
+                    case GameManager.InteractableType.ItemHolding:
                         if (!holding)
                             return;
                         selectedGameObject.GetComponent<IngredientsHolding>().AddIngredient(holding);
                         holding = null;
                         break;
 
+                    case GameManager.InteractableType.SuriMaker:
+                        break;
 
                     case GameManager.InteractableType.SuriFlatter:
                         break;

@@ -30,7 +30,7 @@ public class CameraRay : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Consumeable") || hit.collider.gameObject.CompareTag("Interactable"))
+            if ((hit.collider.gameObject.CompareTag("Consumeable") || hit.collider.gameObject.CompareTag("Interactable"))) // && !hit.collider.gameObject.transform.parent.CompareTag("hand"))
             {
               
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
@@ -42,6 +42,11 @@ public class CameraRay : MonoBehaviour
                 holding = null;
             }
             UpdateObject();
+            if (holding == null)
+            {
+                gameManager.ChangeHighlightedObject(null);
+                return;
+            }
             gameManager.ChangeHighlightedObject(holding);
         }
     }

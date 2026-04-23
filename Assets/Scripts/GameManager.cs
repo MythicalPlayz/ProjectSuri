@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
         PotatoFreezer,
         ChickenFreezer,
         Fryer,
+        ItemHolding,
         SuriMaker,
         SuriFlatter,
         Wrapper,
