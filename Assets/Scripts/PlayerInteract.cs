@@ -33,6 +33,8 @@ public class PlayerInteract : MonoBehaviour
                     if (s && s.maker)
                     {
                         s.maker.GetComponent<SuriMaker>().MakeSuri(holding);
+                        if (hand.transform.childCount == 0)
+                            holding = null;
                     }
                     return;
                 }
@@ -40,6 +42,7 @@ public class PlayerInteract : MonoBehaviour
                 if (selectedGameObject.GetComponent<Suri>() && selectedGameObject.GetComponent<Suri>().maker)
                 {
                     Suri s = selectedGameObject.GetComponent<Suri>();
+                    s.Wrap(true);
                     s.maker.GetComponent<SuriMaker>().RemoveSuri();
                     s.maker = null;
                 }
@@ -93,8 +96,13 @@ public class PlayerInteract : MonoBehaviour
                                 holding = null;
                         break;
 
-                    case GameManager.InteractableType.SuriFlatter:
+                    case GameManager.InteractableType.SuriGrill:
+
+                        selectedGameObject.GetComponent<SuriGrill>().Grill(holding);
+                        if (hand.transform.childCount == 0)
+                            holding = null;
                         break;
+
                     case GameManager.InteractableType.Wrapper:
                         break;
                     case GameManager.InteractableType.TakeOut:

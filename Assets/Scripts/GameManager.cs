@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         Fryer,
         ItemHolding,
         SuriMaker,
-        SuriFlatter,
+        SuriGrill,
         Wrapper,
         TakeOut,
     }

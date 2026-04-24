@@ -11,9 +11,9 @@ public class Suri : MonoBehaviour
     public bool cheese; // C
     public bool spicy; // S
     public bool pepper; // P
-    public bool wrapper; // W
+    public bool bag; // B
+    public bool wrapped; // W
     public bool grillMarks; // L
-    public bool closed = false;
 
     public GameObject friesObj;
     public GameObject chickenObj;
@@ -27,6 +27,7 @@ public class Suri : MonoBehaviour
     public GameObject pepperObj;
     public GameObject wrapperObj;
     public GameObject grillMarksObj;
+    public GameObject bagObj;
 
     public GameObject maker;
 
@@ -42,9 +43,10 @@ public class Suri : MonoBehaviour
         cheese = false;
         spicy = false;
         pepper = false;
-        wrapper = false;
+        wrapped = false;
         grillMarks = false;
-        
+        bag = false;
+
         friesObj.SetActive(false);
         chickenObj.SetActive(false);
         ketchupObj.SetActive(false);
@@ -57,6 +59,7 @@ public class Suri : MonoBehaviour
         pepperObj.SetActive(false);
         wrapperObj.SetActive(false);
         grillMarksObj.SetActive(false);
+        bagObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -101,12 +104,14 @@ public class Suri : MonoBehaviour
     {
         switch (ingredient)
         {
-            //case "Fries":
-            //    mainType = 1;
-            //    break;
-            //case "Chicken":
-            //    mainType = 2;
-            //    break;
+            case "Fries":
+                mainType = (mainType == 0) ? 1 : 3;
+                friesObj.SetActive(true);
+                break;
+            case "Chicken":
+                mainType = (mainType == 0) ? 2 : 3;
+                chickenObj.SetActive(true);
+                break;
             case "Ketchup":
                 ketchup = true;
                 ketchupObj.SetActive(true);
@@ -125,5 +130,24 @@ public class Suri : MonoBehaviour
                 break;
                 // TODO More Ingredients here
         }
+    }
+
+    public void Wrap(bool isTrue)
+    {
+        if (isTrue)
+        {
+            wrapped = true;
+            wrapperObj.SetActive(true);
+        }
+        else
+        {
+            wrapped = false;
+            wrapperObj.SetActive(false);
+        }
+    }
+    public void AddGrillMarks()
+    {
+        grillMarks = true;
+        grillMarksObj.SetActive(true);
     }
 }

@@ -7,9 +7,28 @@ public class SuriMaker : MonoBehaviour
     public GameObject suriObj;
     public GameObject suriLoc;
     private bool hasSuri = false;
-    public string[] validIngredients = new string[] { "Ketchup", "Mustard", "Garlic", "Mayo" };
+    private Dictionary<string, int> validIngredients;
+    
+    void Start()
+    {
+        ResetIngredients();
+    }
 
+    private void ResetIngredients()
+    {
+        validIngredients = new Dictionary<string, int>();
+        validIngredients.Add("Fries", 0);
+        validIngredients.Add("Chicken", 0);
+        validIngredients.Add("Ketchup", 0);
+        validIngredients.Add("Mustard", 0);
+        validIngredients.Add("Mayo", 0);
+        validIngredients.Add("Garlic", 0);
+        validIngredients.Add("Tomato", 0);
+        validIngredients.Add("Cheese", 0);
+        validIngredients.Add("Spicy", 0);
+        validIngredients.Add("Pepper", 0);
 
+    }
 
     public void MakeSuri(GameObject selectedGameObject)
     {
@@ -24,15 +43,22 @@ public class SuriMaker : MonoBehaviour
             selectedGameObject.transform.SetParent(suriLoc.transform);
             suriObj.transform.position = suriLoc.transform.position;
             suriObj.GetComponent<Suri>().maker = gameObject;
+            suriObj.GetComponent<Suri>().Wrap(false);
             hasSuri = true;
+            ResetIngredients();
             return;
         }
         if (selectedGameObject.GetComponent<IngredientType>() != null && hasSuri)
         {
             string ingredientType = selectedGameObject.GetComponent<IngredientType>().ingredientType.ToString();
-            if (System.Array.Exists(validIngredients, ingredient => ingredient == ingredientType))
+            if (ingredientType == "Fries" || ingredientType == "Chicken")
+            {
+                Destroy(selectedGameObject);
+            }
+            if (validIngredients.ContainsKey(ingredientType) && validIngredients[ingredientType] == 0)
             {
                 suriObj.GetComponent<Suri>().AddIngredient(ingredientType);
+                validIngredients[ingredientType] = 1;
             }
         }
 
