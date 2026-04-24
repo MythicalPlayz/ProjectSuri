@@ -27,7 +27,15 @@ public class PlayerInteract : MonoBehaviour
             if (selectedGameObject.CompareTag("Consumeable"))
             {
                 if (holding)
+                {
+                    // check if suri making
+                    Suri s = selectedGameObject.GetComponent<Suri>();
+                    if (s && s.maker)
+                    {
+                        s.maker.GetComponent<SuriMaker>().MakeSuri(holding);
+                    }
                     return;
+                }
 
                 Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
@@ -68,7 +76,14 @@ public class PlayerInteract : MonoBehaviour
                         holding = null;
                         break;
 
+
                     case GameManager.InteractableType.SuriMaker:
+
+                            if (holding == null)
+                                return;
+                            selectedGameObject.GetComponent<SuriMaker>().MakeSuri(holding);
+                            if (hand.transform.childCount == 0)
+                                holding = null;
                         break;
 
                     case GameManager.InteractableType.SuriFlatter:

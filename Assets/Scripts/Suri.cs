@@ -28,6 +28,7 @@ public class Suri : MonoBehaviour
     public GameObject wrapperObj;
     public GameObject grillMarksObj;
 
+    public GameObject maker;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,40 +60,70 @@ public class Suri : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //    //TEMP CODE PLEASE DELETE LATER, FOR TESTING PURPOSES ONLY
+    //    if (mainType == 0) {
+    //        friesObj.SetActive(false);
+    //        chickenObj.SetActive(false);
+    //    }
+    //    else if (mainType == 1) {
+    //        friesObj.SetActive(true);
+    //        chickenObj.SetActive(false);
+    //    }
+    //    else if (mainType == 2) {
+    //        friesObj.SetActive(false);
+    //        chickenObj.SetActive(true);
+    //    }
+    //    else if (mainType == 3) {
+    //        friesObj.SetActive(true);
+    //        chickenObj.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Invalid mainType value: " + mainType);
+    //    }
+
+    //    ketchupObj.SetActive(ketchup);
+    //    mustardObj.SetActive(mustaard);
+    //    mayoObj.SetActive(mayo);
+    //    garlicObj.SetActive(garlic);
+    //    tomatoObj.SetActive(tomato);
+    //    cheeseObj.SetActive(cheese);
+    //    spicyObj.SetActive(spicy);
+    //    pepperObj.SetActive(pepper);
+    //    wrapperObj.SetActive(wrapper);
+    //    grillMarksObj.SetActive(grillMarks);
+
+    //}
+
+    public void AddIngredient(string ingredient)
     {
-        //TEMP CODE PLEASE DELETE LATER, FOR TESTING PURPOSES ONLY
-        if (mainType == 0) {
-            friesObj.SetActive(false);
-            chickenObj.SetActive(false);
-        }
-        else if (mainType == 1) {
-            friesObj.SetActive(true);
-            chickenObj.SetActive(false);
-        }
-        else if (mainType == 2) {
-            friesObj.SetActive(false);
-            chickenObj.SetActive(true);
-        }
-        else if (mainType == 3) {
-            friesObj.SetActive(true);
-            chickenObj.SetActive(true);
-        }
-        else
+        switch (ingredient)
         {
-            Debug.LogError("Invalid mainType value: " + mainType);
+            //case "Fries":
+            //    mainType = 1;
+            //    break;
+            //case "Chicken":
+            //    mainType = 2;
+            //    break;
+            case "Ketchup":
+                ketchup = true;
+                ketchupObj.SetActive(true);
+                break;
+            case "Mustard":
+                mustaard = true;
+                mustardObj.SetActive(true);
+                break;
+            case "Mayo":
+                mayo = true;
+                mayoObj.SetActive(true);
+                break;
+            case "Garlic":
+                garlic = true;
+                garlicObj.SetActive(true);
+                break;
+                // TODO More Ingredients here
         }
-
-        ketchupObj.SetActive(ketchup);
-        mustardObj.SetActive(mustaard);
-        mayoObj.SetActive(mayo);
-        garlicObj.SetActive(garlic);
-        tomatoObj.SetActive(tomato);
-        cheeseObj.SetActive(cheese);
-        spicyObj.SetActive(spicy);
-        pepperObj.SetActive(pepper);
-        wrapperObj.SetActive(wrapper);
-        grillMarksObj.SetActive(grillMarks);
-
     }
 }

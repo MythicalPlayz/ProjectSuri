@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1873882238716015275}
   - component: {fileID: 3920135148406833194}
   - component: {fileID: 4624652774377632310}
+  - component: {fileID: 1390758324471597917}
   m_Layer: 0
   m_Name: Fries
   m_TagString: Consumeable
@@ -131,3 +132,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1390758324471597917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778008061410338544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42686d39c9304e64d89095604a427a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientType
+  ingredientType: 1

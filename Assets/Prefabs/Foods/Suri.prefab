@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 3385358416033541932}
   - component: {fileID: 8658842294929635817}
   - component: {fileID: 5682380283989092061}
+  - component: {fileID: 5121530778759157516}
   m_Layer: 0
   m_Name: Suri
   m_TagString: Consumeable
@@ -768,6 +769,19 @@ MonoBehaviour:
   pepperObj: {fileID: 7081428371906623664}
   wrapperObj: {fileID: 8761734948626355383}
   grillMarksObj: {fileID: 4597930329139929412}
+--- !u!114 &5121530778759157516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737179207708032589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42686d39c9304e64d89095604a427a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientType
+  ingredientType: 0
 --- !u!1 &1987127742801391145
 GameObject:
   m_ObjectHideFlags: 0

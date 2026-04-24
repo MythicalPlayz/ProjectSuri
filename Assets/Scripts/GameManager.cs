@@ -19,6 +19,21 @@ public class GameManager : MonoBehaviour
         TakeOut,
     }
 
+    public enum IngredientType
+    {
+        SuriBread,
+        Fries,
+        Chicken,
+        Ketchup,
+        Mustard,
+        Mayo,
+        Garlic,
+        Tomato,
+        Cheese,
+        Spicy,
+        Pepper,
+    }
+
     public void ChangeHighlightedObject(GameObject gameObject)
     {
         if (gameObject == selectedGameObject)
