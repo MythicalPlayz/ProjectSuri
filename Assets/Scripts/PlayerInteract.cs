@@ -37,6 +37,13 @@ public class PlayerInteract : MonoBehaviour
                     return;
                 }
 
+                if (selectedGameObject.GetComponent<Suri>() && selectedGameObject.GetComponent<Suri>().maker)
+                {
+                    Suri s = selectedGameObject.GetComponent<Suri>();
+                    s.maker.GetComponent<SuriMaker>().RemoveSuri();
+                    s.maker = null;
+                }
+
                 Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;

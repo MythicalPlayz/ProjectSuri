@@ -37,4 +37,10 @@ public class SuriMaker : MonoBehaviour
         }
 
     }
+
+    public void RemoveSuri()
+    {
+        suriObj = null;
+        hasSuri = false;
+    }
 }
