@@ -42,7 +42,8 @@ public class PlayerInteract : MonoBehaviour
                 if (selectedGameObject.GetComponent<Suri>() && selectedGameObject.GetComponent<Suri>().maker)
                 {
                     Suri s = selectedGameObject.GetComponent<Suri>();
-                    s.Wrap(true);
+                    if (!s.UnTouched())
+                        s.Wrap(true);
                     s.maker.GetComponent<SuriMaker>().RemoveSuri();
                     s.maker = null;
                 }
@@ -65,7 +66,21 @@ public class PlayerInteract : MonoBehaviour
                     case GameManager.InteractableType.ChickenFreezer:
 
                         if (holding != null)
+                        {
+                            if (holding.GetComponent<Suri>() != null && holding.GetComponent<Suri>().UnTouched() )
+                            {
+                                selectedGameObject.GetComponent<ItemGiver>().RemoveItem(holding);
+                                if (hand.transform.childCount == 0)
+                                    holding = null;
+                            }
+                            else if (holding.GetComponent<FrozenFood>() != null)
+                            {
+                                selectedGameObject.GetComponent<ItemGiver>().RemoveItem(holding);
+                                if (hand.transform.childCount == 0)
+                                    holding = null;
+                            }
                             return;
+                        }
                         holding = selectedGameObject.GetComponent<ItemGiver>().GiveItem(hand);
                         break;
 
@@ -104,7 +119,19 @@ public class PlayerInteract : MonoBehaviour
                         break;
 
                     case GameManager.InteractableType.Wrapper:
+                        if (holding == null)
+                            return;
+                        selectedGameObject.GetComponent<SuriBagger>().BagSuri(holding);
                         break;
+
+                    case GameManager.InteractableType.Trash:
+                        if (holding == null)
+                            return;
+                        selectedGameObject.GetComponent<Trash1>().Remove(holding);
+                        if (hand.transform.childCount == 0)
+                            holding = null;
+                        break;
+
                     case GameManager.InteractableType.TakeOut:
                         break;
                 }

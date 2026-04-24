@@ -128,7 +128,22 @@ public class Suri : MonoBehaviour
                 garlic = true;
                 garlicObj.SetActive(true);
                 break;
-                // TODO More Ingredients here
+            case "Tomato":
+                tomato = true;
+                tomatoObj.SetActive(true);
+                break;
+            case "Cheese":
+                cheese = true;
+                cheeseObj.SetActive(true);
+                break;
+            case "Spicy":
+                spicy = true;
+                spicyObj.SetActive(true);
+                break;
+            case "Pepper":
+                pepper = true;
+                pepperObj.SetActive(true);
+                break;
         }
     }
 
@@ -149,5 +164,10 @@ public class Suri : MonoBehaviour
     {
         grillMarks = true;
         grillMarksObj.SetActive(true);
+    }
+
+    public bool UnTouched()
+    {
+        return mainType == 0 && !ketchup && !mustaard && !mayo && !garlic && !tomato && !cheese && !spicy && !pepper && !wrapped && !grillMarks;
     }
 }

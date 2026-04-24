@@ -25,4 +25,16 @@ public class ItemGiver : MonoBehaviour
         item.transform.SetParent(hand.transform);
         return item;
     }
+
+    public void RemoveItem(GameObject item)
+    {
+       if (itemToGive != null && item.name.Contains(itemToGive.name))
+       {
+           Destroy(item);
+       }
+       else
+       {
+           Debug.LogWarning("ItemGiver: Attempted to remove an item that doesn't match the assigned item!");
+       }
+    }
 }

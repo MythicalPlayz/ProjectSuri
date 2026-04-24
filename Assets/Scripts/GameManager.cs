@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         SuriGrill,
         Wrapper,
         TakeOut,
+        Trash,
     }
 
     public enum IngredientType
