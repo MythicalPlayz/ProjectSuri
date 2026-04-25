@@ -11,6 +11,10 @@ public class IngredientsHolding : MonoBehaviour
     public GameObject musLoc;
     public GameObject garLoc;
     public GameObject mayLoc;
+    public GameObject cheLoc;
+    public GameObject spyLoc;
+    public GameObject tomLoc;
+    public GameObject pepLoc;
 
     private void Start()
     {
@@ -18,6 +22,10 @@ public class IngredientsHolding : MonoBehaviour
         locations.Add("Mustard", musLoc);
         locations.Add("Garlic", garLoc);
         locations.Add("Mayo", mayLoc);
+        locations.Add("Cheese", cheLoc);
+        locations.Add("Spicy", spyLoc);
+        locations.Add("Tomato", tomLoc);
+        locations.Add("Pepper", pepLoc);
     }
 
     public void AddIngredient(GameObject Ingredient)

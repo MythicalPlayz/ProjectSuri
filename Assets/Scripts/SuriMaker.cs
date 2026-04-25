@@ -43,7 +43,8 @@ public class SuriMaker : MonoBehaviour
             selectedGameObject.transform.SetParent(suriLoc.transform);
             suriObj.transform.position = suriLoc.transform.position;
             suriObj.GetComponent<Suri>().maker = gameObject;
-            suriObj.GetComponent<Suri>().Wrap(false);
+            if (!suriObj.GetComponent<Suri>().UnTouched())
+                suriObj.GetComponent<Suri>().Wrap(false);
             hasSuri = true;
             ResetIngredients();
             return;

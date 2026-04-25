@@ -28,6 +28,7 @@ public class Suri : MonoBehaviour
     public GameObject wrapperObj;
     public GameObject grillMarksObj;
     public GameObject bagObj;
+    public GameObject breadObj;
 
     public GameObject maker;
 
@@ -62,43 +63,23 @@ public class Suri : MonoBehaviour
         bagObj.SetActive(false);
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    //TEMP CODE PLEASE DELETE LATER, FOR TESTING PURPOSES ONLY
-    //    if (mainType == 0) {
-    //        friesObj.SetActive(false);
-    //        chickenObj.SetActive(false);
-    //    }
-    //    else if (mainType == 1) {
-    //        friesObj.SetActive(true);
-    //        chickenObj.SetActive(false);
-    //    }
-    //    else if (mainType == 2) {
-    //        friesObj.SetActive(false);
-    //        chickenObj.SetActive(true);
-    //    }
-    //    else if (mainType == 3) {
-    //        friesObj.SetActive(true);
-    //        chickenObj.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Invalid mainType value: " + mainType);
-    //    }
 
-    //    ketchupObj.SetActive(ketchup);
-    //    mustardObj.SetActive(mustaard);
-    //    mayoObj.SetActive(mayo);
-    //    garlicObj.SetActive(garlic);
-    //    tomatoObj.SetActive(tomato);
-    //    cheeseObj.SetActive(cheese);
-    //    spicyObj.SetActive(spicy);
-    //    pepperObj.SetActive(pepper);
-    //    wrapperObj.SetActive(wrapper);
-    //    grillMarksObj.SetActive(grillMarks);
+    private void WrapperModels(bool wrap)
+    {
+        breadObj.SetActive(!wrap);
+        friesObj.SetActive(!wrap && (mainType == 1 || mainType == 3));
+        chickenObj.SetActive(!wrap && (mainType == 2 || mainType == 3));
+        ketchupObj.SetActive(!wrap);
+        mustardObj.SetActive(!wrap);
+        mayoObj.SetActive(!wrap);
+        garlicObj.SetActive(!wrap);
+        tomatoObj.SetActive(!wrap);
+        cheeseObj.SetActive(!wrap);
+        spicyObj.SetActive(!wrap);
+        pepperObj.SetActive(!wrap);
+        wrapperObj.SetActive(wrap);
 
-    //}
+    }
 
     public void AddIngredient(string ingredient)
     {
@@ -152,13 +133,12 @@ public class Suri : MonoBehaviour
         if (isTrue)
         {
             wrapped = true;
-            wrapperObj.SetActive(true);
         }
         else
         {
             wrapped = false;
-            wrapperObj.SetActive(false);
         }
+        WrapperModels(wrapped);
     }
     public void AddGrillMarks()
     {
