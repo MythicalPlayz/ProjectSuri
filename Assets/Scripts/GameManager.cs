@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private GameObject selectedGameObject;
+    public GameObject orderManagerObject;
+    private OrderManager orderManager;
 
     public enum InteractableType
     {
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
         Wrapper,
         TakeOut,
         Trash,
+        OrdersBoard,
     }
 
     public enum IngredientType
@@ -55,5 +58,10 @@ public class GameManager : MonoBehaviour
         }
         selectedGameObject = gameObject;
         selectedGameObject.GetComponent<Outline>().enabled = true;
+    }
+
+    private void Start()
+    {
+        orderManager = orderManagerObject.GetComponent<OrderManager>();
     }
 }

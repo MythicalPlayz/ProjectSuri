@@ -24,7 +24,18 @@ public class PlayerInteract : MonoBehaviour
         {
             if (selectedGameObject == null)
                 return;
-            if (selectedGameObject.CompareTag("Consumeable"))
+
+            if (selectedGameObject.CompareTag("OrderReciept"))
+            {
+                Debug.Log("Picked Up:" + selectedGameObject?.name);
+                selectedGameObject?.transform.SetParent(hand.transform);
+                selectedGameObject.transform.position = hand.transform.position;
+                holding = selectedGameObject;
+                selectedGameObject.GetComponent<OrderReciept>().orderBoard.GetComponent<OrderBoard>().FreeSpace(selectedGameObject.GetComponent<OrderReciept>().id);
+            }
+
+
+            else if (selectedGameObject.CompareTag("Consumeable"))
             {
                 if (holding)
                 {
@@ -36,6 +47,14 @@ public class PlayerInteract : MonoBehaviour
                         if (hand.transform.childCount == 0)
                             holding = null;
                     }
+                    if (s && s.takeout)
+                    {
+                        //TODO: Complete it
+                        s.takeout.GetComponent<Takeout>().FreeLocation(s.tID);
+                        Destroy(selectedGameObject);
+                        Destroy(holding);
+                        holding = null;
+                    }
                     return;
                 }
 
@@ -46,6 +65,11 @@ public class PlayerInteract : MonoBehaviour
                         s.Wrap(true);
                     s.maker.GetComponent<SuriMaker>().RemoveSuri();
                     s.maker = null;
+                }
+
+                if (selectedGameObject.GetComponent<Suri>() && selectedGameObject.GetComponent<Suri>().takeout)
+                {
+                    return;
                 }
 
                 Debug.Log("Picked Up:" + selectedGameObject?.name);
@@ -60,6 +84,11 @@ public class PlayerInteract : MonoBehaviour
                 switch (interactType.type)
                 {
                     case GameManager.InteractableType.Register:
+
+                        if (holding)
+                            return;
+                        selectedGameObject.GetComponent<Register>().RegisterOrder();
+
                         break;
                     case GameManager.InteractableType.SuriHolder:
                     case GameManager.InteractableType.PotatoFreezer:
@@ -119,12 +148,14 @@ public class PlayerInteract : MonoBehaviour
                         break;
 
                     case GameManager.InteractableType.Wrapper:
+
                         if (holding == null)
                             return;
                         selectedGameObject.GetComponent<SuriBagger>().BagSuri(holding);
                         break;
 
                     case GameManager.InteractableType.Trash:
+
                         if (holding == null)
                             return;
                         selectedGameObject.GetComponent<Trash1>().Remove(holding);
@@ -133,6 +164,20 @@ public class PlayerInteract : MonoBehaviour
                         break;
 
                     case GameManager.InteractableType.TakeOut:
+
+                        if (holding == null)
+                            return;
+                        selectedGameObject.GetComponent<Takeout>().TakeLocation(holding);
+                        if (hand.transform.childCount == 0)
+                            holding = null;
+                        break;
+
+                    case GameManager.InteractableType.OrdersBoard:
+                        if (holding == null || !holding.CompareTag("OrderReciept"))
+                            return;
+                        selectedGameObject.GetComponent<OrderBoard>().PlaceReciept(holding);
+                        if (hand.transform.childCount == 0)
+                            holding = null;
                         break;
                 }
             }

@@ -9,6 +9,7 @@ TagManager:
   - Interactable
   - hand
   - FrozenFood
+  - OrderReciept
   layers:
   - Default
   - TransparentFX
