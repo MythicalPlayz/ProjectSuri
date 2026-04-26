@@ -11,12 +11,17 @@ public class OrderManager : MonoBehaviour
     [SerializeField] GameObject ordersBoard;
     [SerializeField] GameObject orderRecieptPrefab;
 
+    [SerializeField] float bonusBoost = 0.5f; // 50% bonus for completing orders quickly
+    [SerializeField] float accuracyBoost = 0.5f; // 50% boost based on accuracy
+    [SerializeField] float timeLimit = 60f; // Time limit for bonus eligibility in seconds
+    [SerializeField] int defaultScore = 100;
+
     public class Order
     {
         public int id;
         public float timeOfCreation;
         public Status stat;
-        Dictionary<string, bool> ingredients;
+        public Dictionary<string, bool> ingredients;
 
         public enum Status { pending, completed, failed }
 
@@ -113,5 +118,103 @@ public class OrderManager : MonoBehaviour
         reciept.transform.SetParent(ordersBoard.transform, false);
         ordersBoard.GetComponent<OrderBoard>().PlaceReciept(reciept);
         reciept.GetComponent<OrderReciept>().Initialize(id, time, text);
+    }
+
+    public int CompleteOrder(GameObject suri, OrderReciept orderd)
+    {
+        if (!suri.GetComponent<Suri>() || !suri.GetComponent<Suri>().bag)
+        {
+            Debug.Log("Not a valid Suri to complete an order.");
+            return 0;
+        }
+        Suri s = suri.GetComponent<Suri>();
+        int total = 0;
+        float timeTaken = Time.time;
+        Order order = Orders[orderd.orderNumber];
+
+        order.stat = Order.Status.completed;
+        float timediff = timeTaken - order.timeOfCreation;
+        float accuracy = 0f;
+        float totalIngredients = 10f;
+        float correctIngredients = 0f;
+
+        //
+
+        if (order.ingredients["Fries"] == (s.mainType == 1 || s.mainType == 3))
+        {
+            correctIngredients++;
+        }
+        
+        if (order.ingredients["Chicken"] == (s.mainType == 2 || s.mainType == 3))
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Ketchup"] == s.ketchup)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Mustard"] == s.mustaard)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Mayo"] == s.mayo)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Garlic"] == s.garlic)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Tomato"] == s.tomato)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Cheese"] == s.cheese)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Spicy"] == s.spicy)
+        {
+            correctIngredients++;
+        }
+
+        if (order.ingredients["Pepper"] == s.pepper)
+        {
+            correctIngredients++;
+        }
+
+        accuracy = correctIngredients / totalIngredients;
+
+        if (accuracy == 1f)
+        {
+            accuracy += accuracyBoost; // Full accuracy bonus
+        }
+
+
+        if (timediff < timeLimit)
+        {
+            accuracy += bonusBoost; // Bonus is scaled by accuracy
+        }
+
+        else if (timediff < timeLimit * 2)
+        {
+            // no boost
+        }
+        else
+        {
+            accuracy -= bonusBoost; // Penalty for taking too long
+            accuracy = Mathf.Max(0f, accuracy); // Ensure accuracy doesn't go negative
+        }
+
+        total = (int)(defaultScore * accuracy);
+
+        return total;
     }
 }

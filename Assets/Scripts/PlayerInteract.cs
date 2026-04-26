@@ -8,12 +8,18 @@ public class PlayerInteract : MonoBehaviour
     public GameObject selectedGameObject;
 
     private GameObject holding;
+    private GameManager gameManager;
+    private OrderManager orderManager;
+
+
     [SerializeField] private GameObject hand;
 
     private InputAction interactAction;
     void Start()
     {
         interactAction = InputSystem.actions.FindAction("InteractWith");
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        orderManager = GameObject.FindFirstObjectByType<OrderManager>();
     }
 
     // Update is called once per frame
@@ -47,10 +53,10 @@ public class PlayerInteract : MonoBehaviour
                         if (hand.transform.childCount == 0)
                             holding = null;
                     }
-                    if (s && s.takeout)
+                    if (s && s.takeout && holding.GetComponent<OrderReciept>())
                     {
-                        //TODO: Complete it
                         s.takeout.GetComponent<Takeout>().FreeLocation(s.tID);
+                        gameManager.UpdateScore(orderManager.CompleteOrder(selectedGameObject,holding.GetComponent<OrderReciept>()));
                         Destroy(selectedGameObject);
                         Destroy(holding);
                         holding = null;

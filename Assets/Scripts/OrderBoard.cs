@@ -28,7 +28,7 @@ public class OrderBoard : MonoBehaviour
             reciept.transform.SetParent(OL2.transform);
             reciept.transform.position = OL2.transform.position;
             reciept.transform.rotation = OL2.transform.rotation;
-            reciept.GetComponent<OrderReciept>().id = 1;
+            reciept.GetComponent<OrderReciept>().id = 2;
             isOL2Occupied = true;
         }
         else if (!isOL3Occupied)
@@ -36,7 +36,7 @@ public class OrderBoard : MonoBehaviour
             reciept.transform.SetParent(OL3.transform);
             reciept.transform.position = OL3.transform.position;
             reciept.transform.rotation = OL3.transform.rotation;
-            reciept.GetComponent<OrderReciept>().id = 1;
+            reciept.GetComponent<OrderReciept>().id = 3;
             isOL3Occupied = true;
         }
         else if (!isOL4Occupied)
@@ -44,7 +44,7 @@ public class OrderBoard : MonoBehaviour
             reciept.transform.SetParent(OL4.transform);
             reciept.transform.position = OL4.transform.position;
             reciept.transform.rotation = OL4.transform.rotation;
-            reciept.GetComponent<OrderReciept>().id = 1;
+            reciept.GetComponent<OrderReciept>().id = 4;
             isOL4Occupied = true;
         }
         reciept.GetComponent<OrderReciept>().orderBoard = gameObject;

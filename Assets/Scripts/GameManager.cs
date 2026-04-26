@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,6 +8,10 @@ public class GameManager : MonoBehaviour
     private GameObject selectedGameObject;
     public GameObject orderManagerObject;
     private OrderManager orderManager;
+
+    public int score = 0;
+    public TextMeshProUGUI scoreText;
+
 
     public enum InteractableType
     {
@@ -63,5 +69,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         orderManager = orderManagerObject.GetComponent<OrderManager>();
+        score = 0;
+        scoreText.text = "Score: " + score;
+    }
+
+    public void UpdateScore(int score)
+    {
+        this.score += score;
+        scoreText.text = "Score:" + this.score;
     }
 }
