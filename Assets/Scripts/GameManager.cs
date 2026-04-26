@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     public TextMeshProUGUI scoreText;
-
+    public TextMeshProUGUI timerText;
+    public float timer = 300f;
 
     public enum InteractableType
     {
@@ -77,5 +78,25 @@ public class GameManager : MonoBehaviour
     {
         this.score += score;
         scoreText.text = "Score:" + this.score;
+    }
+
+    public void UpdateTimer()
+    {
+        //timer = time;
+        //int minutes = Mathf.FloorToInt(timer / 60f);
+        //int seconds = Mathf.FloorToInt(timer % 60f);
+        //timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timer -= Time.deltaTime;
+        if (timer >= 0)
+            timerText.text = ((int)timer).ToString();
+        else
+        {
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void Update()
+    {
+        UpdateTimer();
     }
 }
