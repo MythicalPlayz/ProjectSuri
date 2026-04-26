@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SuriMaker : MonoBehaviour
@@ -8,10 +9,14 @@ public class SuriMaker : MonoBehaviour
     public GameObject suriLoc;
     private bool hasSuri = false;
     private Dictionary<string, int> validIngredients;
-    
+
+    private InventorySystem inventorySystem;
+    private string[] limitedIngredients = new string[] { "Cheese", "Tomato", "Spicy", "Pepper" };
+
     void Start()
     {
         ResetIngredients();
+        inventorySystem = FindFirstObjectByType<InventorySystem>();
     }
 
     private void ResetIngredients()
@@ -58,6 +63,20 @@ public class SuriMaker : MonoBehaviour
             }
             if (validIngredients.ContainsKey(ingredientType) && validIngredients[ingredientType] == 0)
             {
+                if (limitedIngredients.Contains(ingredientType))
+                {
+                    int ingredientCount = inventorySystem.GetIngredientCount(ingredientType);
+                    if (ingredientCount <= 0)
+                    {
+                        Debug.LogWarning("SuriMaker: No " + ingredientType + " left in inventory to add to Suri!");
+                        return;
+                    }
+                    if (ingredientCount == 1)
+                    {
+                        inventorySystem.OrderMore(ingredientType);
+                    }
+                }
+                inventorySystem.UseIngredient(ingredientType);
                 suriObj.GetComponent<Suri>().AddIngredient(ingredientType);
                 validIngredients[ingredientType] = 1;
             }

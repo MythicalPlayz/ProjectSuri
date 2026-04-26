@@ -225,6 +225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemGiver
   itemToGive: {fileID: 4473335011677308107, guid: 9e272cd517461ec45878c752f3754e5e, type: 3}
+  inventorySystem: {fileID: 0}
+  itemName: Chicken
 --- !u!114 &4896768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,12 +464,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33608588}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 18.67, y: 1.018, z: 0}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -959.80646, y: -317.34644, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 956882563}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &47605027
 GameObject:
@@ -1596,8 +1598,8 @@ MonoBehaviour:
   timerText: {fileID: 358603215}
   timer: 300
   isGameActive: 1
-  mainCamera: {fileID: 0}
-  ramsisCamera: {fileID: 0}
+  mainCamera: {fileID: 330585545}
+  ramsisCamera: {fileID: 33608591}
 --- !u!4 &247004845
 Transform:
   m_ObjectHideFlags: 0
@@ -2415,6 +2417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemGiver
   itemToGive: {fileID: 3421202472499260369, guid: faea8b2aef9dade43b7ce6ce58ea41e0, type: 3}
+  inventorySystem: {fileID: 0}
+  itemName: Fries
 --- !u!114 &426666147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5184,7 +5188,10 @@ Transform:
   m_LocalPosition: {x: 978.47644, y: 318.36444, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 33608592}
+  - {fileID: 1810099758}
+  - {fileID: 1929599615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &970573370
@@ -6513,6 +6520,52 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1249524468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249524470}
+  - component: {fileID: 1249524469}
+  m_Layer: 0
+  m_Name: InventorySystem
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1249524469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249524468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a02aa3536cae7439022e4fc61d60e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
+  startCount: 5
+  orderDelay: 30
+--- !u!4 &1249524470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249524468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.12536, y: 0, z: 2.55971}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1258414316
 GameObject:
   m_ObjectHideFlags: 0
@@ -7454,6 +7507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemGiver
   itemToGive: {fileID: 506500709040612330, guid: cef10b7f0440c9d47adde6f2263463e4, type: 3}
+  inventorySystem: {fileID: 0}
+  itemName: SuriBread
 --- !u!114 &1660354465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8148,9 +8203,9 @@ MonoBehaviour:
   gameMenu: {fileID: 103371543}
   gameOverMenu: {fileID: 1690608110}
   pauseMenu: {fileID: 1616679642}
-  textDisplayDelay: 0.2
+  textDisplayDelay: 0.066
   ramsisMessageText: {fileID: 2097406337}
-  finalScoreText: {fileID: 0}
+  finalScoreText: {fileID: 347778267}
 --- !u!1 &1747957373
 GameObject:
   m_ObjectHideFlags: 0
@@ -8254,7 +8309,7 @@ GameObject:
   - component: {fileID: 1810099756}
   - component: {fileID: 1810099755}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Golden Ramsis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8348,12 +8403,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810099754}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.007, y: 0.804, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -962.4694, y: -317.56046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 956882563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1818058800
 GameObject:
@@ -9087,12 +9142,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929599611}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.37, y: -0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -968.10645, y: -318.36444, z: 0}
   m_LocalScale: {x: 1, y: 11.607, z: 19.112}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 956882563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043066265
 GameObject:
@@ -9403,7 +9458,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Golden is Impressed with your work
+  m_text: 'Golden Ramsis: That is the worst F%#king Service I have seen with my own
+    eyes.\n Get Better.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9499,8 +9555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 400, y: 50}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 700, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2114437058
 GameObject:
@@ -9915,7 +9971,5 @@ SceneRoots:
   - {fileID: 1733550780}
   - {fileID: 548083659}
   - {fileID: 1472863796}
-  - {fileID: 33608592}
-  - {fileID: 1810099758}
-  - {fileID: 1929599615}
   - {fileID: 956882563}
+  - {fileID: 1249524470}

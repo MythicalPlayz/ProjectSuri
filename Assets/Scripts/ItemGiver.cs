@@ -5,6 +5,8 @@ public class ItemGiver : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public GameObject itemToGive;
+    public InventorySystem inventorySystem;
+    public string itemName;
 
     void Start()
     {
@@ -12,6 +14,7 @@ public class ItemGiver : MonoBehaviour
         {
             Debug.LogError("ItemGiver: No item assigned to give!");
         }
+        inventorySystem = FindFirstObjectByType<InventorySystem>();
     }
 
     public GameObject GiveItem(GameObject hand)
@@ -21,6 +24,21 @@ public class ItemGiver : MonoBehaviour
             Debug.LogWarning("ItemGiver: Hand already has an item, cannot give another!");
             return null;
         }
+        int itemCount = inventorySystem.GetIngredientCount(itemName);
+
+        if (itemCount <= 0)
+        {
+            Debug.LogWarning("ItemGiver: No " + itemName + " left in inventory to give!");
+            return null;
+        }
+
+        inventorySystem.UseIngredient(itemName);
+        if (itemCount == 1)
+        {
+            Debug.LogWarning("Last One Ordering More");
+            inventorySystem.OrderMore(itemName);
+        }
+
         GameObject item = Instantiate(itemToGive, hand.transform.position, Quaternion.identity);
         item.transform.SetParent(hand.transform);
         return item;
@@ -30,7 +48,8 @@ public class ItemGiver : MonoBehaviour
     {
        if (itemToGive != null && item.name.Contains(itemToGive.name))
        {
-           Destroy(item);
+            inventorySystem.AddIngrdient(itemName);
+            Destroy(item);
        }
        else
        {
