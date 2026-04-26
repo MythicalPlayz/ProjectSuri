@@ -137,7 +137,8 @@ public class PlayerInteract : MonoBehaviour
                         if (!holding)
                             return;
                         selectedGameObject.GetComponent<IngredientsHolding>().AddIngredient(holding);
-                        holding = null;
+                        if (hand.transform.childCount == 0)
+                            holding = null;
                         break;
 
 

@@ -8,12 +8,16 @@ public class GameManager : MonoBehaviour
     private GameObject selectedGameObject;
     public GameObject orderManagerObject;
     private OrderManager orderManager;
+    private UiManager uiManager;
 
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
     public float timer = 300f;
     public bool isGameActive = true;
+
+    public Camera mainCamera;
+    public Camera ramsisCamera;
 
     public enum InteractableType
     {
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
         orderManager = orderManagerObject.GetComponent<OrderManager>();
         score = 0;
         scoreText.text = "Score: " + score;
+        uiManager = GameObject.FindFirstObjectByType<UiManager>();
     }
 
     public void UpdateScore(int score)
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer >= 0)
             timerText.text = ((int)timer).ToString();
-        else
+        else if (isGameActive)
         {
             EndGame();
              timerText.text = "0";
@@ -109,5 +114,21 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         Time.timeScale = 0f;
+        mainCamera.gameObject.SetActive(false);
+        ramsisCamera.gameObject.SetActive(true);
+        uiManager.GameOver();
+        uiManager.DisplayRamsisMessage(GetRamsisMessage());
+    }
+
+    private string GetRamsisMessage()
+    {
+        if (score >= 1000)
+            return "Golden Ramsis: Congrats Buddy You have proven to me that you are the master of Suri";
+        else if (score >= 500)
+            return "Golden Ramsis: Not Bad Kid!\n You still have a long way to go.";
+        else if (score >= 250)
+            return "Golden Ramsis: That is the worst F%#king Service I have seen with my own eyes.\n Get Better.";
+        else
+            return "Golden Ramsis: ARE YOU A F%#KING IDIOT SURI!\n NOT A SINGLE CUSTOMER YOU GOT RIGHT!";
     }
 }
