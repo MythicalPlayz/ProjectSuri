@@ -35,6 +35,8 @@ public class PlayerInteract : MonoBehaviour
 
             if (selectedGameObject.CompareTag("OrderReciept"))
             {
+                if (holding)
+                    return;
                 Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;
