@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Register : MonoBehaviour
@@ -6,8 +7,9 @@ public class Register : MonoBehaviour
    private OrderManager orderManager;
 
     public bool onCooldown = false;
-    public float cooldownTime = 10f;
-
+    public float cooldownTime = 3f;
+    public int pendingOrdersToAccept = 0;
+    public Queue<GameObject> pendingCustomers = new Queue<GameObject>();
     private void Start()
     {
         orderManager = GameObject.FindFirstObjectByType<OrderManager>();
@@ -20,9 +22,22 @@ public class Register : MonoBehaviour
             Debug.Log("On Cooldown");
             return;
         }
-        orderManager.GenerateOrder();
-        onCooldown = true;
-        StartCoroutine(Cooldown());
+
+        if (pendingOrdersToAccept == 0)
+        {
+            Debug.Log("No pending orders to accept.");
+            return;
+        }
+        GameObject customer = pendingCustomers.Peek();
+        bool status = orderManager.GenerateOrder(customer);
+        if (status)
+        {
+            customer.GetComponent<Customer>().state = 2;
+            pendingOrdersToAccept--;
+            pendingCustomers.Dequeue();
+            onCooldown = true;
+            StartCoroutine(Cooldown());
+        }
     }
 
     IEnumerator Cooldown()

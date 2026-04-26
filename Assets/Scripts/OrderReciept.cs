@@ -23,7 +23,7 @@ public class OrderReciept : MonoBehaviour
     private void LoadText()
     {
         orderText.text = "Order #" + (orderNumber+1) + "\n" +
-                    "Time: " + orderTime.ToString("F2") + "s\n" +
+                    "Time: " + (int)orderTime + "s\n" +
                     "Details: " + orderDetails;
     }
 }

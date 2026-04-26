@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float lookSensitivity = 1f;
     [SerializeField] private GameObject playerCamera;
     private float xRotation = 0f;
+    private GameManager gameManager;
+    private Rigidbody rb;
 
     InputAction moveAction;
     InputAction lookAction;
@@ -14,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        rb = GetComponent<Rigidbody>();
         LockMouse();
     }
 
@@ -23,17 +27,20 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector2 inputVector = moveAction.ReadValue<Vector2>();
-        Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
-        gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
 
+    void FixedUpdate()
+    {
+        if (gameManager.isGameActive == false) return; 
+        Vector2 inputVector = moveAction.ReadValue<Vector2>(); 
+        Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized; 
+        gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
     }
 
     private void LateUpdate()
     {
+        if (gameManager.isGameActive == false)
+            return;
+
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
 
         // Horizontal (Yaw) → rotate Player

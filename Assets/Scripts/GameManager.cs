@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
     public float timer = 300f;
+    public bool isGameActive = true;
 
     public enum InteractableType
     {
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeHighlightedObject(GameObject gameObject)
     {
+        if (!isGameActive)
+            return;
+
         if (gameObject == selectedGameObject)
             return; // No change, do nothing
 
@@ -91,12 +95,19 @@ public class GameManager : MonoBehaviour
             timerText.text = ((int)timer).ToString();
         else
         {
-            Time.timeScale = 0f;
+            EndGame();
+             timerText.text = "0";
         }
     }
 
     public void Update()
     {
         UpdateTimer();
+    }
+
+    public void EndGame()
+    {
+        isGameActive = false;
+        Time.timeScale = 0f;
     }
 }

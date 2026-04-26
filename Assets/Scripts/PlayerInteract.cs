@@ -25,6 +25,8 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.isGameActive == false)
+            return;
         bool interact = interactAction.WasPressedThisFrame();
         if (interact)
         {
@@ -56,7 +58,7 @@ public class PlayerInteract : MonoBehaviour
                     if (s && s.takeout && holding.GetComponent<OrderReciept>())
                     {
                         s.takeout.GetComponent<Takeout>().FreeLocation(s.tID);
-                        gameManager.UpdateScore(orderManager.CompleteOrder(selectedGameObject,holding.GetComponent<OrderReciept>()));
+                        gameManager.UpdateScore(orderManager.CompleteOrder(selectedGameObject, holding.GetComponent<OrderReciept>()));
                         Destroy(selectedGameObject);
                         Destroy(holding);
                         holding = null;

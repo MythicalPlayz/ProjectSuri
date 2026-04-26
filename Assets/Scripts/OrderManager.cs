@@ -7,6 +7,7 @@ public class OrderManager : MonoBehaviour
     public List<Order> Orders = new List<Order>();
     public int activeOrders = 0;
     public int maxOrders = 4;
+    public bool canOrder = true;
 
     [SerializeField] GameObject ordersBoard;
     [SerializeField] GameObject orderRecieptPrefab;
@@ -15,6 +16,8 @@ public class OrderManager : MonoBehaviour
     [SerializeField] float accuracyBoost = 0.5f; // 50% boost based on accuracy
     [SerializeField] float timeLimit = 60f; // Time limit for bonus eligibility in seconds
     [SerializeField] int defaultScore = 100;
+
+    Dictionary<int, GameObject> orderRecieptMap = new Dictionary<int, GameObject>();
 
     public class Order
     {
@@ -96,20 +99,26 @@ public class OrderManager : MonoBehaviour
         }
     }
 
-    public void GenerateOrder()
+    public bool GenerateOrder(GameObject customer)
     {
         if (activeOrders >= maxOrders)
         {
             Debug.Log("Maximum active orders reached. Cannot generate new order.");
-            return;
+            return false;
         }
         activeOrders++;
+        if (activeOrders == maxOrders)
+        {
+            canOrder = false;
+        }
         Order newOrder = new Order(OrderIDCounter);
         newOrder.GenerateRandomOrder();
         Orders.Add(newOrder);
         OrderIDCounter++;
         string[] stra = newOrder.GetOrderDetails();
+        orderRecieptMap.Add(newOrder.id, customer);
         CreateRecipt(newOrder.id, newOrder.timeOfCreation, stra[3]);
+        return true;
     }
 
     private void CreateRecipt(int id, float time, string text)
@@ -131,6 +140,10 @@ public class OrderManager : MonoBehaviour
         int total = 0;
         float timeTaken = Time.time;
         Order order = Orders[orderd.orderNumber];
+        Customer customer = orderRecieptMap[order.id].GetComponent<Customer>();
+        customer.state = 4; // Set customer state to received order
+        activeOrders--;
+        canOrder = true;
 
         order.stat = Order.Status.completed;
         float timediff = timeTaken - order.timeOfCreation;
