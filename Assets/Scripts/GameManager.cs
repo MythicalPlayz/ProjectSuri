@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
@@ -13,8 +14,10 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI moneyText;
     public float timer = 300f;
     public bool isGameActive = true;
+    public float money = 100f;
 
     public Camera mainCamera;
     public Camera ramsisCamera;
@@ -122,7 +125,9 @@ public class GameManager : MonoBehaviour
 
     private string GetRamsisMessage()
     {
-        if (score >= 1000)
+        if (money < 0)
+            return "WHAT THE F%#K MAN!\n You are in Debt!\n I don't care how you did cause this is embaressing.";
+        else if (score >= 1000)
             return "Golden Ramsis: Congrats Buddy You have proven to me that you are the master of Suri";
         else if (score >= 500)
             return "Golden Ramsis: Not Bad Kid!\n You still have a long way to go.";
@@ -130,5 +135,11 @@ public class GameManager : MonoBehaviour
             return "Golden Ramsis: That is the worst F%#king Service I have seen with my own eyes.\n Get Better.";
         else
             return "Golden Ramsis: ARE YOU A F%#KING IDIOT SURI!\n NOT A SINGLE CUSTOMER YOU GOT RIGHT!";
+    }
+
+    public void ChangeMoney(float value)
+    {
+        money += value;
+        moneyText.text = "Money: " + money.ToString("F2") + " EGP";
     }
 }

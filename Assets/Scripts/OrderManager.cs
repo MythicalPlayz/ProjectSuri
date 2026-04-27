@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class OrderManager : MonoBehaviour
     public int activeOrders = 0;
     public int maxOrders = 4;
     public bool canOrder = true;
+    private GameManager gameManager;
 
     [SerializeField] GameObject ordersBoard;
     [SerializeField] GameObject orderRecieptPrefab;
@@ -18,6 +20,17 @@ public class OrderManager : MonoBehaviour
     [SerializeField] int defaultScore = 100;
 
     Dictionary<int, GameObject> orderRecieptMap = new Dictionary<int, GameObject>();
+
+    public Dictionary<string, float> values = new Dictionary<string, float>()
+    {
+        {"SuriBread", 1.5f},
+        {"Fries", 2f},
+        {"Chicken", 3f},
+        {"Cheese", 2f},
+        {"Spicy", 1.5f},
+        {"Tomato", 0.75f},
+        {"Pepper", 1f}
+    };
 
     public class Order
     {
@@ -99,6 +112,11 @@ public class OrderManager : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+    }
+
     public bool GenerateOrder(GameObject customer)
     {
         if (activeOrders >= maxOrders)
@@ -150,57 +168,68 @@ public class OrderManager : MonoBehaviour
         float accuracy = 0f;
         float totalIngredients = 10f;
         float correctIngredients = 0f;
+        float earned = 0f;
 
         //
 
         if (order.ingredients["Fries"] == (s.mainType == 1 || s.mainType == 3))
         {
             correctIngredients++;
+            earned += values["Fries"];
         }
         
         if (order.ingredients["Chicken"] == (s.mainType == 2 || s.mainType == 3))
         {
             correctIngredients++;
+            earned += values["Chicken"];
         }
 
         if (order.ingredients["Ketchup"] == s.ketchup)
         {
             correctIngredients++;
+            earned += 0.1f;
         }
 
         if (order.ingredients["Mustard"] == s.mustaard)
         {
             correctIngredients++;
+            earned += 0.1f;
         }
 
         if (order.ingredients["Mayo"] == s.mayo)
         {
             correctIngredients++;
+            earned += 0.1f;
         }
 
         if (order.ingredients["Garlic"] == s.garlic)
         {
             correctIngredients++;
+            earned += 0.1f;
         }
 
         if (order.ingredients["Tomato"] == s.tomato)
         {
             correctIngredients++;
+            earned += values["Tomato"];
         }
 
         if (order.ingredients["Cheese"] == s.cheese)
         {
             correctIngredients++;
+            earned += values["Cheese"];
         }
 
         if (order.ingredients["Spicy"] == s.spicy)
         {
             correctIngredients++;
+            earned += values["Spicy"];
         }
 
         if (order.ingredients["Pepper"] == s.pepper)
         {
             correctIngredients++;
+            earned += values["Pepper"];
         }
 
         accuracy = correctIngredients / totalIngredients;
@@ -225,6 +254,9 @@ public class OrderManager : MonoBehaviour
             accuracy -= bonusBoost; // Penalty for taking too long
             accuracy = Mathf.Max(0f, accuracy); // Ensure accuracy doesn't go negative
         }
+
+        earned *= accuracy; // Scale earnings by accuracy and time bonus
+        gameManager.ChangeMoney(earned);
 
         total = (int)(defaultScore * accuracy);
 

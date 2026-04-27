@@ -20,8 +20,22 @@ public class InventorySystem : MonoBehaviour
     private GameManager gameManager;
     public float orderDelay = 30f;
 
+    public Dictionary<string, float> values;
+
     void Start()
     {
+        values = new Dictionary<string, float>()
+    {
+        {"SuriBread", 1f},
+        {"Fries", 1.5f},
+        {"Chicken", 2f},
+        {"Cheese", 1.5f},
+        {"Spicy", 1f},
+        {"Tomato", 0.5f},
+        {"Pepper", 0.75f}
+    };
+
+
         gameManager = FindFirstObjectByType<GameManager>();
         suriBreakCount = startCount;
         frozenFriesCount = startCount;
@@ -36,6 +50,30 @@ public class InventorySystem : MonoBehaviour
     {
         if (gameManager.isGameActive)
         {
+            switch (str)
+            {
+                case "SuriBread":
+                    gameManager.ChangeMoney(-values["SuriBread"] * startCount);
+                    break;
+                case "Fries":
+                    gameManager.ChangeMoney(-values["Fries"] * startCount);
+                    break;
+                case "Chicken":
+                    gameManager.ChangeMoney(-values["Chicken"] * startCount);
+                    break;
+                case "Cheese":
+                    gameManager.ChangeMoney(-values["Cheese"] * startCount);
+                    break;
+                case "Spicy":
+                    gameManager.ChangeMoney(-values["Spicy"] * startCount);
+                    break;
+                case "Tomato":
+                    gameManager.ChangeMoney(-values["Tomato"] * startCount);
+                    break;
+                case "Pepper":
+                    gameManager.ChangeMoney(-values["Pepper"] * startCount);
+                    break;
+            }
             StartCoroutine(WaitForDelivery(str));
         }
     }
