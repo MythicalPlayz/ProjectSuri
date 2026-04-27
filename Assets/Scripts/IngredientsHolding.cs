@@ -36,6 +36,7 @@ public class IngredientsHolding : MonoBehaviour
         {
             Ingredient.transform.SetParent(locations[name].transform);
             Ingredient.transform.position = locations[name].transform.position;
+            Ingredient.transform.rotation = locations[name].transform.rotation;
         }
     }
 

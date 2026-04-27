@@ -73,6 +73,11 @@ public class SuriMaker : MonoBehaviour
                     }
                     if (ingredientCount == 1)
                     {
+                        InventoryVisible inventory = selectedGameObject.GetComponent<InventoryVisible>();
+                        if (inventory)
+                        {
+                            inventory.TurnOff();
+                        }
                         inventorySystem.OrderMore(ingredientType);
                     }
                 }
