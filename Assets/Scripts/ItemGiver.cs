@@ -37,6 +37,8 @@ public class ItemGiver : MonoBehaviour
         {
             Debug.LogWarning("Last One Ordering More");
             inventorySystem.OrderMore(itemName);
+            if (gameObject.GetComponent<InventoryVisible>())
+                gameObject.GetComponent<InventoryVisible>().TurnOff();
         }
 
         GameObject item = Instantiate(itemToGive, hand.transform.position, Quaternion.identity);
