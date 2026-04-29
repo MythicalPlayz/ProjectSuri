@@ -14,6 +14,21 @@ public class Fryer : MonoBehaviour
     [SerializeField] private GameObject currentFoodHan1;
     [SerializeField] private GameObject currentFoodHan2;
 
+    [SerializeField] private GameObject handle1P;
+    [SerializeField] private GameObject handle2P;
+    [SerializeField] private GameObject handle1A;
+    [SerializeField] private GameObject handle2A;
+
+
+    void Start()
+    {
+        handle1A.SetActive(false);
+        handle2A.SetActive(false);
+    }
+
+    public bool usingHan1 = false;
+    public bool usingHan2 = false;
+
 
     public void FryFood(GameObject holding)
     {
@@ -23,34 +38,52 @@ public class Fryer : MonoBehaviour
         if (availableSlots <= 0)
             return;
 
-        if (holding.gameObject.GetComponent<FrozenFood>().type == FrozenFood.FrozenType.Fries)
+
+        GameObject currentLocation;
+        GameObject currentHandleB;
+        GameObject currentHandleA;
+
+        if (!usingHan1)
         {
-            StartCoroutine(FryingProcess(pObj, pTime));
-            availableSlots--;
-            Destroy(holding);
+            currentLocation = currentFoodHan1;
+            currentHandleB = handle1P;
+            currentHandleA = handle1A;
+            usingHan1 = true;
         }
-        else if (holding.gameObject.GetComponent<FrozenFood>().type == FrozenFood.FrozenType.Chicken)
+        else if (!usingHan2)
         {
-            StartCoroutine(FryingProcess(cObj, cTime));
+            currentLocation = currentFoodHan2;
+            currentHandleB = handle2P;
+            currentHandleA = handle2A;
+            usingHan2 = true;
+        }
+        else
+        {
+            // No available handles, return early
+            return;
+        }
+
+
+        if (holding.gameObject.GetComponent<FrozenFood>().type == FrozenFood.FrozenType.Fries || holding.gameObject.GetComponent<FrozenFood>().type == FrozenFood.FrozenType.Chicken)
+        {
+            GameObject sObj = (holding.gameObject.GetComponent<FrozenFood>().type == FrozenFood.FrozenType.Fries) ? pObj : cObj;
+            float sTime = (sObj == pObj) ? pTime : cTime;
+            currentHandleA.SetActive(true);
+            currentHandleB.SetActive(false);
+            StartCoroutine(FryingProcess(sObj, sTime, currentLocation, currentHandleB, currentHandleA));
             availableSlots--;
             Destroy(holding);
         }
     }
 
-    IEnumerator FryingProcess(GameObject food, float timeToFry)
+    IEnumerator FryingProcess(GameObject food, float timeToFry, GameObject currentFoodLocation, GameObject handleB, GameObject handleA)
     {
         yield return new WaitForSeconds(timeToFry);
+        handleA.SetActive(false);
+        handleB.SetActive(true);
         GameObject friedFood = SpawnObject(food);
-        if (currentFoodHan1.transform.childCount == 0)
-        {
-            friedFood.transform.SetParent(currentFoodHan1.transform);
-            friedFood.transform.position = currentFoodHan1.transform.position;
-        }
-        else if (currentFoodHan2.transform.childCount == 0)
-        {
-            friedFood.transform.SetParent(currentFoodHan2.transform);
-            friedFood.transform.position = currentFoodHan2.transform.position;
-        }
+        friedFood.transform.SetParent(currentFoodLocation.transform);
+        friedFood.transform.position = currentFoodLocation.transform.position;
     }
 
     GameObject SpawnObject(GameObject food)
