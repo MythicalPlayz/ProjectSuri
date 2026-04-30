@@ -13,6 +13,7 @@ public class SuriGrill : MonoBehaviour
 
     public float grillTime = 5f;
     private AudioSource audioSource;
+    [SerializeField] private ParticleSystem grillParticles;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class SuriGrill : MonoBehaviour
         grillOff.SetActive(false);
         wrapOn.SetActive(true);
         audioSource.Play();
+        grillParticles.Play();
 
         suriObj = suri;
         suriObj.transform.SetParent(suriLoc.transform);
@@ -61,6 +63,7 @@ public class SuriGrill : MonoBehaviour
             wrapOn.SetActive(false);
             suriObj.SetActive(true);
             audioSource.Stop();
+            grillParticles.Stop();
         }
     }
 

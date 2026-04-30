@@ -18,6 +18,8 @@ public class Fryer : MonoBehaviour
     [SerializeField] private GameObject handle2P;
     [SerializeField] private GameObject handle1A;
     [SerializeField] private GameObject handle2A;
+    [SerializeField] private ParticleSystem p1;
+    [SerializeField] private ParticleSystem p2;
 
     public HandleBar h1;
     public HandleBar h2;
@@ -77,20 +79,22 @@ public class Fryer : MonoBehaviour
             currentHandleB.SetActive(false);
             GameObject canvas = currentLocation.transform.GetChild(0).gameObject;
             HandleBar handleBar = canvas.GetComponent<HandleBar>();
+            ParticleSystem p = (sObj == pObj) ? p1 : p2;
             if (handleBar)
             {
                 handleBar.gameObject.SetActive(true);
                 handleBar.maxTime = sTime;
                 handleBar.StartTimer();
             }
+            p.Play();
             currentLocation.GetComponent<AudioSource>().Play();
-            StartCoroutine(FryingProcess(sObj, sTime, currentLocation, currentHandleB, currentHandleA));
+            StartCoroutine(FryingProcess(sObj, sTime, currentLocation, currentHandleB, currentHandleA,p));
             availableSlots--;
             Destroy(holding);
         }
     }
 
-    IEnumerator FryingProcess(GameObject food, float timeToFry, GameObject currentFoodLocation, GameObject handleB, GameObject handleA)
+    IEnumerator FryingProcess(GameObject food, float timeToFry, GameObject currentFoodLocation, GameObject handleB, GameObject handleA, ParticleSystem p)
     {
         yield return new WaitForSeconds(timeToFry);
         handleA.SetActive(false);
@@ -99,6 +103,7 @@ public class Fryer : MonoBehaviour
         friedFood.transform.SetParent(currentFoodLocation.transform);
         friedFood.transform.position = currentFoodLocation.transform.position;
         currentFoodLocation.GetComponent<AudioSource>().Stop();
+        p.Stop();
     }
 
     GameObject SpawnObject(GameObject food)
