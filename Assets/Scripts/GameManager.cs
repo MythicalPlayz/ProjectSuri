@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool isGameActive = true;
     public float money = 100f;
 
+    public Animator ramsisAnimator;
+
     private AudioSource audioSource;
 
     public Camera mainCamera;
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         isGameActive = false;
-        Time.timeScale = 0f;
+        // Time.timeScale = 0f;
         mainCamera.gameObject.SetActive(false);
         ramsisCamera.gameObject.SetActive(true);
         uiManager.GameOver();
@@ -129,15 +131,32 @@ public class GameManager : MonoBehaviour
     private string GetRamsisMessage()
     {
         if (money < 0)
+        {
+            ramsisAnimator.SetInteger("AnimationType", 0);
             return "WHAT THE F%#K MAN!\n You are in Debt!\n I don't care how you did cause this is embaressing.";
-        else if (score >= 1000)
+        }
+        else if (score >= 1000) 
+        {
+            ramsisAnimator.SetInteger("AnimationType", 4);
             return "Golden Ramsis: Congrats Buddy You have proven to me that you are the master of Suri";
-        else if (score >= 500)
+        }
+            
+        else if (score >= 500) {
+            ramsisAnimator.SetInteger("AnimationType", 3);
             return "Golden Ramsis: Not Bad Kid!\n You still have a long way to go.";
-        else if (score >= 250)
+        }
+           
+        else if (score >= 250) 
+        {
+            ramsisAnimator.SetInteger("AnimationType", 2);
             return "Golden Ramsis: That is the worst F%#king Service I have seen with my own eyes.\n Get Better.";
-        else
+        }
+        else 
+        {
+            ramsisAnimator.SetInteger("AnimationType", 1);
             return "Golden Ramsis: ARE YOU A F%#KING IDIOT SURI!\n NOT A SINGLE CUSTOMER YOU GOT RIGHT!";
+        }
+            
     }
 
     public void ChangeMoney(float value)

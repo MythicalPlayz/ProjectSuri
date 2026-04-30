@@ -9,6 +9,9 @@ public class Customer : MonoBehaviour
     private NavMeshAgent agent;
     private OrderManager orderManager;
 
+    // 1. ADDED: The Animator reference
+    private Animator animator;
+
     public GameObject waitZone;
     public GameObject endZone;
 
@@ -32,6 +35,9 @@ public class Customer : MonoBehaviour
         orderManager = GameObject.FindFirstObjectByType<OrderManager>();
         handleBar = GameObject.FindFirstObjectByType<HandleBar>();
 
+        // 2. ADDED: Grab the Animator component attached to the Customer
+        animator = GetComponent<Animator>();
+
         // 1. Get the QueueManagers from the child objects of Register and Takeout
         if (register != null)
         {
@@ -42,16 +48,19 @@ public class Customer : MonoBehaviour
         {
             takeoutQueue = takeout.GetComponentInChildren<QueueManager>();
         }
-
-        // Since the customer starts in state 0, they should join the register line immediately
-        //if (registerQueue != null)
-        //{
-        //    registerQueue.JoinLine(this.gameObject);
-        //}
     }
 
     void Update()
     {
+        // 3. ADDED: The Animation Logic
+        // We put this OUTSIDE the switch statement so it constantly checks speed 
+        // no matter if they are going to the register, the wait zone, or leaving.
+        if (agent != null && animator != null)
+        {
+            bool isMoving = agent.velocity.magnitude > 0.1f;
+            animator.SetBool("isWalking", isMoving);
+        }
+
         switch (state)
         {
             case 0:
