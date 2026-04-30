@@ -11,6 +11,9 @@ public class OrderManager : MonoBehaviour
     public bool canOrder = true;
     private GameManager gameManager;
 
+    public AudioClip orderCorrectSound;
+    public AudioClip orderIncorrectSound;
+
     [SerializeField] GameObject ordersBoard;
     [SerializeField] GameObject orderRecieptPrefab;
 
@@ -257,6 +260,15 @@ public class OrderManager : MonoBehaviour
 
         earned *= accuracy; // Scale earnings by accuracy and time bonus
         gameManager.ChangeMoney(earned);
+
+        if (accuracy >= 0.8f)
+        {
+            gameManager.PlaySound(orderCorrectSound);
+        }
+        else
+        {
+            gameManager.PlaySound(orderIncorrectSound);
+        }
 
         total = (int)(defaultScore * accuracy);
 

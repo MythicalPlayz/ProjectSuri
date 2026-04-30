@@ -7,14 +7,25 @@ public class InventoryVisible : MonoBehaviour
     InventorySystem inventorySystem;
 
     public GameObject foodDisappear;
+    public HandleBar handleBar;
 
     void Start()
     {
         inventorySystem = FindFirstObjectByType<InventorySystem>();
+        if (handleBar)
+        {
+            handleBar.maxTime = inventorySystem.orderDelay;
+            handleBar.gameObject.SetActive(false);
+        }
     }
 
     public void TurnOff()
     {
+        if (handleBar)
+        { 
+            handleBar.Reset();
+            handleBar.StartTimer();
+        }
         foodDisappear.SetActive(false);
         StartCoroutine(TurnOn());
     }

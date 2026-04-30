@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool isGameActive = true;
     public float money = 100f;
 
+    private AudioSource audioSource;
+
     public Camera mainCamera;
     public Camera ramsisCamera;
 
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         scoreText.text = "Score: " + score;
         uiManager = GameObject.FindFirstObjectByType<UiManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateScore(int score)
@@ -141,5 +144,10 @@ public class GameManager : MonoBehaviour
     {
         money += value;
         moneyText.text = "Money: " + money.ToString("F2") + " EGP";
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

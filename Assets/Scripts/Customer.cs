@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,8 @@ public class Customer : MonoBehaviour
     // Safety checks so we only trigger logic once per state
     private bool registered = false;
     private bool joinedTakeout = false;
+    public float maxWaitTime = 30f;
+    private HandleBar handleBar;
 
     void Start()
     {
@@ -27,6 +30,7 @@ public class Customer : MonoBehaviour
         takeout = GameObject.FindFirstObjectByType<Takeout>();
         agent = GetComponent<NavMeshAgent>();
         orderManager = GameObject.FindFirstObjectByType<OrderManager>();
+        handleBar = GameObject.FindFirstObjectByType<HandleBar>();
 
         // 1. Get the QueueManagers from the child objects of Register and Takeout
         if (register != null)
@@ -58,6 +62,8 @@ public class Customer : MonoBehaviour
                     register.pendingOrdersToAccept++;
                     register.pendingCustomers.Enqueue(gameObject);
                     registerQueue.JoinLine(this.gameObject);
+                    handleBar.StartTimer();
+                    StartCoroutine(WaitTilRemoval());
                 }
                 break;
 
@@ -68,8 +74,10 @@ public class Customer : MonoBehaviour
 
             case 2:
                 // 2. Tell the takeout queue we want to join, but only do it ONCE
+                StopAllCoroutines();
                 if (joinedTakeout == false)
                 {
+                    handleBar.gameObject.SetActive(false);
                     registerQueue.LeaveLine();
                     joinedTakeout = true;
                     if (takeoutQueue != null)
@@ -88,6 +96,19 @@ public class Customer : MonoBehaviour
                 takeoutQueue.LeaveLine();
                 Destroy(gameObject);
                 break;
+        }
+    }
+
+    IEnumerator WaitTilRemoval()
+    {
+        yield return new WaitForSeconds(maxWaitTime);
+
+        if (state == 0)
+        {
+            register.pendingOrdersToAccept--;
+            register.pendingCustomers.Dequeue();
+            registerQueue.LeaveLine();
+            Destroy(gameObject);
         }
     }
 }

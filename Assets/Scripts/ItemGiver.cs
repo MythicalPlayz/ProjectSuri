@@ -7,6 +7,7 @@ public class ItemGiver : MonoBehaviour
     public GameObject itemToGive;
     public InventorySystem inventorySystem;
     public string itemName;
+    public HandleBar handlebar;
 
     void Start()
     {
@@ -15,6 +16,11 @@ public class ItemGiver : MonoBehaviour
             Debug.LogError("ItemGiver: No item assigned to give!");
         }
         inventorySystem = FindFirstObjectByType<InventorySystem>();
+        if (handlebar)
+        {
+            handlebar.maxTime = inventorySystem.orderDelay;
+            handlebar.gameObject.SetActive(false);
+        }
     }
 
     public GameObject GiveItem(GameObject hand)
@@ -36,6 +42,8 @@ public class ItemGiver : MonoBehaviour
         if (itemCount == 1)
         {
             Debug.LogWarning("Last One Ordering More");
+            handlebar.Reset();
+            handlebar.StartTimer();
             inventorySystem.OrderMore(itemName);
             if (gameObject.GetComponent<InventoryVisible>())
                 gameObject.GetComponent<InventoryVisible>().TurnOff();

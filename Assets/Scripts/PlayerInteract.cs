@@ -13,6 +13,10 @@ public class PlayerInteract : MonoBehaviour
 
 
     [SerializeField] private GameObject hand;
+    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private AudioClip interactSound;
+
+    private AudioSource audioSource;
 
     private InputAction interactAction;
     void Start()
@@ -20,6 +24,7 @@ public class PlayerInteract : MonoBehaviour
         interactAction = InputSystem.actions.FindAction("InteractWith");
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
         orderManager = GameObject.FindFirstObjectByType<OrderManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +47,7 @@ public class PlayerInteract : MonoBehaviour
                 selectedGameObject.transform.position = hand.transform.position;
                 holding = selectedGameObject;
                 selectedGameObject.GetComponent<OrderReciept>().orderBoard.GetComponent<OrderBoard>().FreeSpace(selectedGameObject.GetComponent<OrderReciept>().id);
+                audioSource.PlayOneShot(pickupSound);
             }
 
 
@@ -54,6 +60,7 @@ public class PlayerInteract : MonoBehaviour
                     if (s && s.maker)
                     {
                         s.maker.GetComponent<SuriMaker>().MakeSuri(holding);
+                        audioSource.PlayOneShot(interactSound);
                         if (hand.transform.childCount == 0)
                             holding = null;
                     }
@@ -75,6 +82,7 @@ public class PlayerInteract : MonoBehaviour
                         s.Wrap(true);
                     s.maker.GetComponent<SuriMaker>().RemoveSuri();
                     s.maker = null;
+                    audioSource.PlayOneShot(pickupSound);
                 }
 
                 if (selectedGameObject.GetComponent<Suri>() && selectedGameObject.GetComponent<Suri>().takeout)
@@ -86,10 +94,12 @@ public class PlayerInteract : MonoBehaviour
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;
                 holding = selectedGameObject;
+                audioSource.PlayOneShot(pickupSound);
             }
             else if (selectedGameObject.CompareTag("Interactable"))
             {
                 Debug.Log("Interacted with:" + selectedGameObject?.name);
+                audioSource.PlayOneShot(interactSound);
                 InteractType interactType = selectedGameObject.GetComponent<InteractType>();
                 switch (interactType.type)
                 {
@@ -129,6 +139,8 @@ public class PlayerInteract : MonoBehaviour
                         if (holding == null || !holding.CompareTag("FrozenFood"))
                             return;
                             selectedGameObject.GetComponent<Fryer>().FryFood(holding);
+                        if (holding.transform.childCount == 0)
+                            holding = null;
                         break;
 
 

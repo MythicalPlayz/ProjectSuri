@@ -19,16 +19,21 @@ public class Fryer : MonoBehaviour
     [SerializeField] private GameObject handle1A;
     [SerializeField] private GameObject handle2A;
 
+    public HandleBar h1;
+    public HandleBar h2;
+
+    public bool usingHan1 = false;
+    public bool usingHan2 = false;
+
+
 
     void Start()
     {
         handle1A.SetActive(false);
         handle2A.SetActive(false);
+        h1.gameObject.SetActive(false);
+        h2.gameObject.SetActive(false);
     }
-
-    public bool usingHan1 = false;
-    public bool usingHan2 = false;
-
 
     public void FryFood(GameObject holding)
     {
@@ -70,6 +75,15 @@ public class Fryer : MonoBehaviour
             float sTime = (sObj == pObj) ? pTime : cTime;
             currentHandleA.SetActive(true);
             currentHandleB.SetActive(false);
+            GameObject canvas = currentLocation.transform.GetChild(0).gameObject;
+            HandleBar handleBar = canvas.GetComponent<HandleBar>();
+            if (handleBar)
+            {
+                handleBar.gameObject.SetActive(true);
+                handleBar.maxTime = sTime;
+                handleBar.StartTimer();
+            }
+            currentLocation.GetComponent<AudioSource>().Play();
             StartCoroutine(FryingProcess(sObj, sTime, currentLocation, currentHandleB, currentHandleA));
             availableSlots--;
             Destroy(holding);
@@ -84,6 +98,7 @@ public class Fryer : MonoBehaviour
         GameObject friedFood = SpawnObject(food);
         friedFood.transform.SetParent(currentFoodLocation.transform);
         friedFood.transform.position = currentFoodLocation.transform.position;
+        currentFoodLocation.GetComponent<AudioSource>().Stop();
     }
 
     GameObject SpawnObject(GameObject food)

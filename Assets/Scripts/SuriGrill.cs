@@ -1,16 +1,32 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SuriGrill : MonoBehaviour
 {
     public GameObject suriLoc;
     private GameObject suriObj;
+    public GameObject wrapOn;
+    public GameObject grillOn;
+    public GameObject grillOff;
+    public HandleBar handleBar;
 
     public float grillTime = 5f;
-    
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        wrapOn.SetActive(false);
+        grillOn.SetActive(false);
+        grillOff.SetActive(true);
+        handleBar.maxTime = grillTime;
+        handleBar.gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Grill(GameObject suri)
     {
-        if (suriObj != null) return; // Already grilling something
+        if (suriObj != null) return;
 
         if (!suri.GetComponent<Suri>())
             return;
@@ -18,9 +34,17 @@ public class SuriGrill : MonoBehaviour
         if (!suri.GetComponent<Suri>().wrapped)
             return;
 
+        grillOn.SetActive(true);
+        grillOff.SetActive(false);
+        wrapOn.SetActive(true);
+        audioSource.Play();
+
         suriObj = suri;
-        suriObj.transform.SetParent(suriLoc.transform); // Parent to the grill for organization
+        suriObj.transform.SetParent(suriLoc.transform);
         suriObj.transform.position = suriLoc.transform.position;
+        suriObj.transform.rotation = suriLoc.transform.rotation;
+        handleBar.Reset();
+        handleBar.StartTimer();
         suriObj.SetActive(false);
         StartCoroutine(GrillCoroutine());
     }
@@ -30,10 +54,13 @@ public class SuriGrill : MonoBehaviour
         yield return new WaitForSeconds(grillTime);
         if (suriObj != null)
         {
-            // Here you can add code to change the suri's state to "grilled" or similar
             Debug.Log("Suri has been grilled!");
             suriObj.GetComponent<Suri>().AddGrillMarks();
-            suriObj.SetActive(true); // Make the suri visible again after grilling
+            grillOn.SetActive(false);
+            grillOff.SetActive(true);
+            wrapOn.SetActive(false);
+            suriObj.SetActive(true);
+            audioSource.Stop();
         }
     }
 
