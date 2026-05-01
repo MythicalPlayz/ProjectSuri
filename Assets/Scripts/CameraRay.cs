@@ -1,3 +1,5 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +10,8 @@ public class CameraRay : MonoBehaviour
     private GameObject holding;
     private Vector3 screenCenter;
     private GameManager gameManager;
+
+    public TextMeshProUGUI textbox;
     void Start()
     {
         screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
@@ -35,11 +39,16 @@ public class CameraRay : MonoBehaviour
               
                 //Debug.Log("Hit: " + hit.collider.gameObject.name);
                 holding = hit.collider.gameObject;
-                
+                IUIStr uiStr = holding.GetComponent<IUIStr>();
+                if (uiStr != null)
+                {
+                    UpdateUI(true, uiStr.str);
+                }
             }
             else
             {
                 holding = null;
+                UpdateUI(false);
             }
             UpdateObject();
             if (holding == null)
@@ -54,5 +63,18 @@ public class CameraRay : MonoBehaviour
     void UpdateObject()
     {
         gameObject.GetComponent<PlayerInteract>().selectedGameObject = holding;
+    }
+
+    void UpdateUI(bool isEnabled,string str = "")
+    {
+        if (isEnabled)
+        {
+            textbox.text = str;
+            textbox.gameObject.SetActive(true);
+        }
+        else
+        {
+            textbox.gameObject.SetActive(false);
+        }
     }
 }

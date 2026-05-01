@@ -144,6 +144,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ba80f8e5abbf0243beed3a5be303089, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6183716679839736734}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ba80f8e5abbf0243beed3a5be303089, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8974848330838696618}
   m_SourcePrefab: {fileID: 100100000, guid: 2ba80f8e5abbf0243beed3a5be303089, type: 3}
 --- !u!1 &506500709040612330 stripped
 GameObject:
@@ -202,6 +205,8 @@ MonoBehaviour:
   bagObj: {fileID: 3159517826161225107}
   breadObj: {fileID: 1640591208599619206}
   maker: {fileID: 0}
+  takeout: {fileID: 0}
+  tID: 0
 --- !u!65 &5470344013519123421
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -241,6 +246,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8974848330838696618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506500709040612330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Suri
 --- !u!1 &689096010792981528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 168378438785174179, guid: 2ba80f8e5abbf0243beed3a5be303089, type: 3}

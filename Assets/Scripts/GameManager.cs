@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public Camera ramsisCamera;
+
+    private InputAction pause;
+    private bool isPaused = false;
 
     public enum InteractableType
     {
@@ -89,6 +93,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         uiManager = GameObject.FindFirstObjectByType<UiManager>();
         audioSource = GetComponent<AudioSource>();
+        pause = InputSystem.actions.FindAction("Pause");
     }
 
     public void UpdateScore(int score)
@@ -116,6 +121,35 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         UpdateTimer();
+
+        // 1. Get the input
+        bool pauseValue = pause.WasPressedThisFrame();
+
+        // 2. Only check for the button press here
+        if (pauseValue)
+        {
+            if (isPaused)
+            {
+                // Unpause logic
+                uiManager.ChangePause(false);
+                isPaused = false;
+                Time.timeScale = 1f;
+
+                // Re-enable game logic if needed
+                isGameActive = true;
+            }
+            else if (isGameActive) // Only allow pausing if the game is actually running
+            {
+                // Pause logic
+                uiManager.ChangePause(true);
+                isPaused = true;
+                Time.timeScale = 0f;
+
+                // Typically you keep isGameActive true so logic knows 
+                // the game hasn't ended, OR you handle it like this:
+                isGameActive = false;
+            }
+        }
     }
 
     public void EndGame()

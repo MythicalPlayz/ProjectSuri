@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 8658842294929635817}
   - component: {fileID: 5682380283989092061}
   - component: {fileID: 5121530778759157516}
+  - component: {fileID: 4992017546467065881}
   m_Layer: 0
   m_Name: Suri2
   m_TagString: Consumeable
@@ -771,7 +772,10 @@ MonoBehaviour:
   wrapperObj: {fileID: 8761734948626355383}
   grillMarksObj: {fileID: 4597930329139929412}
   bagObj: {fileID: 3224105508110647879}
+  breadObj: {fileID: 0}
   maker: {fileID: 0}
+  takeout: {fileID: 0}
+  tID: 0
 --- !u!114 &5121530778759157516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,6 +789,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientType
   ingredientType: 0
+--- !u!114 &4992017546467065881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737179207708032589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: 
 --- !u!1 &1987127742801391145
 GameObject:
   m_ObjectHideFlags: 0

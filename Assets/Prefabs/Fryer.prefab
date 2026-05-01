@@ -10222,6 +10222,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8607610594904431262}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8757537287477414206}
   m_SourcePrefab: {fileID: 100100000, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
 --- !u!1 &1960689195575952735 stripped
 GameObject:
@@ -10324,6 +10327,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8757537287477414206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667154067585719510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Fry Frozen Food
 --- !u!4 &5444534504377484908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}

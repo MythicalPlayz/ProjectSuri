@@ -77,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3bd2f1e3207e22345b80e468cb5a9066, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7003589714344405713}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3bd2f1e3207e22345b80e468cb5a9066, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 319102336099141995}
   m_SourcePrefab: {fileID: 100100000, guid: 3bd2f1e3207e22345b80e468cb5a9066, type: 3}
 --- !u!1 &4415701458106792628 stripped
 GameObject:
@@ -135,3 +138,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.15121116, y: 0.14147034, z: 0.5333728}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &319102336099141995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415701458106792628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Chicken

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6312642145563917165}
   - component: {fileID: 8626564626848956660}
   - component: {fileID: 1785808242471703301}
+  - component: {fileID: -5213271548706998071}
   m_Layer: 0
   m_Name: Order
   m_TagString: OrderReciept
@@ -90,7 +91,21 @@ MonoBehaviour:
   orderTime: 0
   orderDetails: 
   orderBoard: {fileID: 0}
+  id: 0
   orderText: {fileID: 8895765028728390313}
+--- !u!114 &-5213271548706998071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423405586567946483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Order Reciept
 --- !u!1 &4843240822565245612
 GameObject:
   m_ObjectHideFlags: 0

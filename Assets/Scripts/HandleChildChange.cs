@@ -13,9 +13,9 @@ public class HandleChildChange : MonoBehaviour
 
     private void OnTransformChildrenChanged()
     {
-        if (transform.childCount > 0)
+        if (transform.childCount > 1) //billboard UI
         {
-
+            //added
         }
         else
         {
@@ -24,6 +24,7 @@ public class HandleChildChange : MonoBehaviour
                 fryerScript.usingHan1 = false;
             else
                 fryerScript.usingHan2 = false;
+            fryerScript.availableSlots++;
         }
     }
 }

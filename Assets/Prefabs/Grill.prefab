@@ -5143,6 +5143,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7379673187723062759}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -778423654111653234}
   m_SourcePrefab: {fileID: 100100000, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
 --- !u!1 &2853483703527285326 stripped
 GameObject:
@@ -5332,6 +5335,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-778423654111653234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891190916967729926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Grill Suri
 --- !u!1 &8391810006285643694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7694400819410314759, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}

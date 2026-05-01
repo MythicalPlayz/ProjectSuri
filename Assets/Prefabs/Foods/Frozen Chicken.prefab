@@ -63,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39154c3737afd5c4189715d23ac3b5c8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6717581922110321194}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39154c3737afd5c4189715d23ac3b5c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2502431731980459827}
   m_SourcePrefab: {fileID: 100100000, guid: 39154c3737afd5c4189715d23ac3b5c8, type: 3}
 --- !u!1 &8653942433714529525 stripped
 GameObject:
@@ -82,3 +85,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FrozenFood
   type: 1
+--- !u!114 &-2502431731980459827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8653942433714529525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Frozen Chicken

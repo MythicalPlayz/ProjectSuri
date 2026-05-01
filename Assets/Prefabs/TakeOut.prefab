@@ -712,6 +712,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0fdce2824b4357b4a8345f9f91f7babd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6676560857289723445}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0fdce2824b4357b4a8345f9f91f7babd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2866010608000700161}
   m_SourcePrefab: {fileID: 100100000, guid: 0fdce2824b4357b4a8345f9f91f7babd, type: 3}
 --- !u!4 &23902323665706325 stripped
 Transform:
@@ -791,3 +794,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2866010608000700161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801424842809591791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IUIStr
+  str: Take Out
