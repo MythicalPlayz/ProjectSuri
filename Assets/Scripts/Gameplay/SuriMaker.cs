@@ -60,6 +60,9 @@ public class SuriMaker : MonoBehaviour
             if ((ingredientType == "Fries" || ingredientType == "Chicken") && validIngredients[ingredientType] == 0)
             {
                 Destroy(selectedGameObject);
+                suriObj.GetComponent<Suri>().AddIngredient(ingredientType);
+                validIngredients[ingredientType] = 1;
+                return;
             }
             if (validIngredients.ContainsKey(ingredientType) && validIngredients[ingredientType] == 0)
             {
