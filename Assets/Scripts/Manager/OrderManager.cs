@@ -40,16 +40,7 @@ public class OrderManager : MonoBehaviour
         public int id;
         public float timeOfCreation;
         public Status stat;
-        public Dictionary<string, bool> ingredients;
-
-        public enum Status { pending, completed, failed }
-
-        public Order(int id)
-        {
-            this.id = id;
-            this.timeOfCreation = Time.time;
-            this.stat = Status.pending;
-            this.ingredients = new Dictionary<string, bool>
+        public Dictionary<string, bool> ingredients = new Dictionary<string, bool>
             {
                 { "SuriBread", true },
                 { "Fries", false },
@@ -62,7 +53,15 @@ public class OrderManager : MonoBehaviour
                 { "Cheese", false },
                 { "Spicy", false },
                 { "Pepper", false }
-            };
+        };
+
+        public enum Status { pending, completed, failed }
+
+        public Order(int id)
+        {
+            this.id = id;
+            this.timeOfCreation = Time.time;
+            this.stat = Status.pending;
         }
 
         public void GenerateRandomOrder()
@@ -124,7 +123,7 @@ public class OrderManager : MonoBehaviour
     {
         if (activeOrders >= maxOrders)
         {
-            Debug.Log("Maximum active orders reached. Cannot generate new order.");
+            //Debug.Log("Maximum active orders reached. Cannot generate new order.");
             return false;
         }
         activeOrders++;
@@ -135,10 +134,10 @@ public class OrderManager : MonoBehaviour
         Order newOrder = new Order(OrderIDCounter);
         newOrder.GenerateRandomOrder();
         Orders.Add(newOrder);
-        OrderIDCounter++;
         string[] stra = newOrder.GetOrderDetails();
         orderRecieptMap.Add(newOrder.id, customer);
         CreateRecipt(newOrder.id, newOrder.timeOfCreation, stra[3]);
+        OrderIDCounter++;
         return true;
     }
 
@@ -154,7 +153,7 @@ public class OrderManager : MonoBehaviour
     {
         if (!suri.GetComponent<Suri>() || !suri.GetComponent<Suri>().bag)
         {
-            Debug.Log("Not a valid Suri to complete an order.");
+            //Debug.Log("Not a valid Suri to complete an order.");
             return 0;
         }
         Suri s = suri.GetComponent<Suri>();

@@ -16,7 +16,7 @@ public class HandleBar : MonoBehaviour
     public float tickTime = 0.1f;
 
 
-    void Start()
+    void Awake()
     {
         greenBarRectTransform = greenBar.GetComponent<RectTransform>();
         barWidth = 200;

@@ -13,7 +13,7 @@ public class ItemGiver : MonoBehaviour
     {
         if (itemToGive == null)
         {
-            Debug.LogError("ItemGiver: No item assigned to give!");
+            //Debug.LogError("ItemGiver: No item assigned to give!");
         }
         inventorySystem = FindFirstObjectByType<InventorySystem>();
         if (handlebar)
@@ -27,21 +27,21 @@ public class ItemGiver : MonoBehaviour
     {
         if (hand.transform.childCount > 0)
         {
-            Debug.LogWarning("ItemGiver: Hand already has an item, cannot give another!");
+            //Debug.LogWarning("ItemGiver: Hand already has an item, cannot give another!");
             return null;
         }
         int itemCount = inventorySystem.GetIngredientCount(itemName);
 
         if (itemCount <= 0)
         {
-            Debug.LogWarning("ItemGiver: No " + itemName + " left in inventory to give!");
+            //Debug.LogWarning("ItemGiver: No " + itemName + " left in inventory to give!");
             return null;
         }
 
         inventorySystem.UseIngredient(itemName);
         if (itemCount == 1)
         {
-            Debug.LogWarning("Last One Ordering More");
+            //Debug.LogWarning("Last One Ordering More");
             handlebar.Reset();
             handlebar.StartTimer();
             inventorySystem.OrderMore(itemName);
@@ -63,7 +63,7 @@ public class ItemGiver : MonoBehaviour
        }
        else
        {
-           Debug.LogWarning("ItemGiver: Attempted to remove an item that doesn't match the assigned item!");
+           //Debug.LogWarning("ItemGiver: Attempted to remove an item that doesn't match the assigned item!");
        }
     }
 }

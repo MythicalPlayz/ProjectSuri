@@ -37,7 +37,7 @@ public class SuriMaker : MonoBehaviour
 
     public void MakeSuri(GameObject selectedGameObject)
     {
-        Debug.Log("Making Suri with:" + selectedGameObject.name);
+        //Debug.Log("Making Suri with:" + selectedGameObject.name);
         if ((hasSuri && selectedGameObject.GetComponent<Suri>() != null) || !hasSuri && selectedGameObject.GetComponent<Suri>() == null)
         {
             return;
@@ -57,7 +57,7 @@ public class SuriMaker : MonoBehaviour
         if (selectedGameObject.GetComponent<IngredientType>() != null && hasSuri)
         {
             string ingredientType = selectedGameObject.GetComponent<IngredientType>().ingredientType.ToString();
-            if (ingredientType == "Fries" || ingredientType == "Chicken")
+            if ((ingredientType == "Fries" || ingredientType == "Chicken") && validIngredients[ingredientType] == 0)
             {
                 Destroy(selectedGameObject);
             }
@@ -68,7 +68,7 @@ public class SuriMaker : MonoBehaviour
                     int ingredientCount = inventorySystem.GetIngredientCount(ingredientType);
                     if (ingredientCount <= 0)
                     {
-                        Debug.LogWarning("SuriMaker: No " + ingredientType + " left in inventory to add to Suri!");
+                        //Debug.LogWarning("SuriMaker: No " + ingredientType + " left in inventory to add to Suri!");
                         return;
                     }
                     if (ingredientCount == 1)

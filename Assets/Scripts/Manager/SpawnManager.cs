@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public float isCustomer = 0.5f;
     public float delay = 5f;
     public float spawnInterval = 15f;
+    bool isSpawning = true;
 
     void Start()
     {
@@ -21,8 +22,9 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.isGameOver)
+        if (GameManager.isGameOver && isSpawning)
         {
+            isSpawning = false;
             CancelInvoke("SpawnCustomer"); // Correct way to stop InvokeRepeating
         }
     }

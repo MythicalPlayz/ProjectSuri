@@ -12,15 +12,17 @@ public class CameraRay : MonoBehaviour
     private GameManager gameManager;
 
     public TextMeshProUGUI textbox;
+    private InventorySystem inventorySystem;
     void Start()
     {
         screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        inventorySystem = GameObject.FindFirstObjectByType<InventorySystem>();
     }
 
     private void FixedUpdate()
     {
-        screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        CAM.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
     }
 
     // Update is called once per frame
@@ -30,7 +32,7 @@ public class CameraRay : MonoBehaviour
         Ray ray = CAM.ScreenPointToRay(screenCenter);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+        //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -79,15 +81,14 @@ public class CameraRay : MonoBehaviour
 
         if (iUIStr.isInventory)
         {
-            InventorySystem k = GameObject.FindAnyObjectByType<InventorySystem>();
-            str += "\n" + iUIStr.inventoryStr + " (" + k.GetIngredientCount(iUIStr.inventoryStr) + ")";
+            str += "\n" + iUIStr.inventoryStr + " (" + inventorySystem.GetIngredientCount(iUIStr.inventoryStr) + ")";
         }
 
         if (isEnabled)
         {
             textbox.text = str;
             textbox.gameObject.SetActive(true);
-            Debug.Log(str);
+            //Debug.Log(str);
         }
         else
         {

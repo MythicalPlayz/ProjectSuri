@@ -56,7 +56,7 @@ public class SuriGrill : MonoBehaviour
         yield return new WaitForSeconds(grillTime);
         if (suriObj != null)
         {
-            Debug.Log("Suri has been grilled!");
+            //Debug.Log("Suri has been grilled!");
             suriObj.GetComponent<Suri>().AddGrillMarks();
             grillOn.SetActive(false);
             grillOff.SetActive(true);

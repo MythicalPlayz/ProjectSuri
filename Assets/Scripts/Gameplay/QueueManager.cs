@@ -16,7 +16,7 @@ public class QueueManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("The line is full!");
+            //Debug.Log("The line is full!");
             agent.gameObject.GetComponent<Customer>().state = 4;
         }
     }

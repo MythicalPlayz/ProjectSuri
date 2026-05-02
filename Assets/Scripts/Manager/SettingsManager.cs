@@ -7,6 +7,7 @@ public class SettingsManager : MonoBehaviour
 
     void Start()
     {
+        QualitySettings.vSyncCount = 1;
         // check if playerprefabs exist, if not create them with default values
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {

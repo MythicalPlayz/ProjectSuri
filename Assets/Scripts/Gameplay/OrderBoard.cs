@@ -70,7 +70,7 @@ public class OrderBoard : MonoBehaviour
                 isOL4Occupied = false;
                 break;
             default:
-                Debug.Log("Invalid order slot ID. Must be between 1 and 4.");
+                //Debug.Log("Invalid order slot ID. Must be between 1 and 4.");
                 break;
         }
     }

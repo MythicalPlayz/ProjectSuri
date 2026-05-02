@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         ramsisCamera.gameObject.SetActive(true);
         uiManager.GameOver();
-        if (money >- 0 && score > highScore)
+        if (money >= 0 && score > highScore)
         {
             PlayerPrefs.SetInt("HighScore", score);
             PlayerPrefs.Save();

@@ -30,8 +30,12 @@ public class IngredientsHolding : MonoBehaviour
 
     public void AddIngredient(GameObject Ingredient)
     {
-        Debug.Log("Adding Ingredient:" + Ingredient.name);
-        string name = Ingredient.name; //.Replace("(Clone)", "").Trim();
+        //Debug.Log("Adding Ingredient:" + Ingredient.name);
+        string name = Ingredient.name;
+        if (name.Contains("(Clone)"))
+        {
+            name = name.Replace("(Clone)", "").Trim();
+        }
         if (locations.ContainsKey(name))
         {
             Ingredient.transform.SetParent(locations[name].transform);

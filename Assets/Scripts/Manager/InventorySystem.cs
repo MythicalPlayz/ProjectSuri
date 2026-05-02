@@ -80,7 +80,7 @@ public class InventorySystem : MonoBehaviour
 
     IEnumerator WaitForDelivery(string str)
     {
-        Debug.Log("Ordering more " + str + ", will arrive in " + orderDelay + " seconds.");
+        //Debug.Log("Ordering more " + str + ", will arrive in " + orderDelay + " seconds.");
         yield return new WaitForSeconds(orderDelay);
         switch (str)
         {
@@ -106,7 +106,7 @@ public class InventorySystem : MonoBehaviour
                 pepperCount += startCount;
                 break;
         }
-        Debug.Log(str + " delivery has arrived! Current count: " + GetIngredientCount(str));
+        //Debug.Log(str + " delivery has arrived! Current count: " + GetIngredientCount(str));
     }
 
     public int GetIngredientCount(string str)
@@ -128,7 +128,7 @@ public class InventorySystem : MonoBehaviour
             case "Pepper":
                 return pepperCount;
             default:
-                Debug.LogWarning("InventorySystem: Invalid ingredient type requested: " + str);
+                //Debug.LogWarning("InventorySystem: Invalid ingredient type requested: " + str);
                 return 0;
         }
     }
@@ -159,7 +159,7 @@ public class InventorySystem : MonoBehaviour
                 pepperCount--;
                 break;
             default:
-                Debug.LogWarning("InventorySystem: Invalid ingredient type requested: " + str);
+                //Debug.LogWarning("InventorySystem: Invalid ingredient type requested: " + str);
                 break;
         }
     }

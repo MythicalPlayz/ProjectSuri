@@ -74,6 +74,6 @@ public class Order : MonoBehaviour
                 orderDetails += ingredient.Key.ToString() + " ";
             }
         }
-        Debug.Log(orderDetails.Trim());
+        //Debug.Log(orderDetails.Trim());
     }
 }

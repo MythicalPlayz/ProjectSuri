@@ -19,13 +19,13 @@ public class Register : MonoBehaviour
     {
         if (onCooldown) {
 
-            Debug.Log("On Cooldown");
+            //Debug.Log("On Cooldown");
             return;
         }
 
         if (pendingOrdersToAccept == 0)
         {
-            Debug.Log("No pending orders to accept.");
+            //Debug.Log("No pending orders to accept.");
             return;
         }
         GameObject customer = pendingCustomers.Peek();

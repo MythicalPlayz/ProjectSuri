@@ -24,7 +24,6 @@ public class HandleChildChange : MonoBehaviour
                 fryerScript.usingHan1 = false;
             else
                 fryerScript.usingHan2 = false;
-            fryerScript.availableSlots++;
         }
     }
 }

@@ -42,9 +42,10 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (holding)
                     return;
-                Debug.Log("Picked Up:" + selectedGameObject?.name);
+                //Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;
+                selectedGameObject.transform.rotation = hand.transform.rotation;
                 holding = selectedGameObject;
                 selectedGameObject.GetComponent<OrderReciept>().orderBoard.GetComponent<OrderBoard>().FreeSpace(selectedGameObject.GetComponent<OrderReciept>().id);
                 audioSource.PlayOneShot(pickupSound);
@@ -90,15 +91,16 @@ public class PlayerInteract : MonoBehaviour
                     return;
                 }
 
-                Debug.Log("Picked Up:" + selectedGameObject?.name);
+                //Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;
+                selectedGameObject.transform.rotation = hand.transform.rotation;
                 holding = selectedGameObject;
                 audioSource.PlayOneShot(pickupSound);
             }
             else if (selectedGameObject.CompareTag("Interactable"))
             {
-                Debug.Log("Interacted with:" + selectedGameObject?.name);
+               // Debug.Log("Interacted with:" + selectedGameObject?.name);
                 audioSource.PlayOneShot(interactSound);
                 InteractType interactType = selectedGameObject.GetComponent<InteractType>();
                 switch (interactType.type)
@@ -139,7 +141,6 @@ public class PlayerInteract : MonoBehaviour
                         if (holding == null || !holding.CompareTag("FrozenFood"))
                             return;
                             selectedGameObject.GetComponent<Fryer>().FryFood(holding);
-                        if (holding.transform.childCount == 0)
                             holding = null;
                         break;
 

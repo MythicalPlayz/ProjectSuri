@@ -32,8 +32,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (gameManager.isGameActive == false) return; 
         Vector2 inputVector = moveAction.ReadValue<Vector2>(); 
-        Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized; 
-        gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
+        Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+        rb.MovePosition(rb.position + transform.TransformDirection(moveDirection) * moveSpeed * Time.fixedDeltaTime);
+        //gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
     }
 
     private void LateUpdate()
