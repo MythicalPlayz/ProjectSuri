@@ -94,7 +94,14 @@ public class PlayerInteract : MonoBehaviour
                 //Debug.Log("Picked Up:" + selectedGameObject?.name);
                 selectedGameObject?.transform.SetParent(hand.transform);
                 selectedGameObject.transform.position = hand.transform.position;
-                selectedGameObject.transform.rotation = hand.transform.rotation;
+
+                IngredientType ingredientType = selectedGameObject.GetComponent<IngredientType>();
+                GameManager.IngredientType[] skipped = {GameManager.IngredientType.Ketchup, GameManager.IngredientType.Mustard, GameManager.IngredientType.Mayo, GameManager.IngredientType.Garlic};
+                if (ingredientType && !skipped.Contains(ingredientType.ingredientType))
+                {
+                    selectedGameObject.transform.rotation = hand.transform.rotation;
+                }
+
                 holding = selectedGameObject;
                 audioSource.PlayOneShot(pickupSound);
             }

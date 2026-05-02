@@ -27,6 +27,9 @@ public class SuriGrill : MonoBehaviour
 
     public void Grill(GameObject suri)
     {
+        if (suri == null)
+            return;
+
         if (suriObj != null) return;
 
         if (!suri.GetComponent<Suri>())

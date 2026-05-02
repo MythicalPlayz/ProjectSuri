@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -86,6 +87,7 @@ public class MainMenuUI : MonoBehaviour
         optionsPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(musicVolumeSlider.gameObject);
+        EnableMenuButton(false);
     }
 
     void OpenCredits()
@@ -93,6 +95,7 @@ public class MainMenuUI : MonoBehaviour
         creditsPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(backCreditsButton.gameObject);
+        EnableMenuButton(false);
     }
 
     void BackToMenu(GameObject panel, Button returnButton)
@@ -100,6 +103,7 @@ public class MainMenuUI : MonoBehaviour
         panel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(returnButton.gameObject);
+        EnableMenuButton(true);
     }
 
 
@@ -108,6 +112,7 @@ public class MainMenuUI : MonoBehaviour
         howToPlayPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(backHowButton.gameObject);
+        EnableMenuButton(false);
     }
 
     public void ChangeMusic(float value)
@@ -150,5 +155,14 @@ public class MainMenuUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         text.text = message;
+    }
+
+    void EnableMenuButton(bool enabled)
+    {
+        startGame.interactable = enabled;
+        howToPlay.interactable = enabled;
+        options.interactable = enabled;
+        credits.interactable = enabled;
+        exitGame.interactable = enabled;
     }
 }

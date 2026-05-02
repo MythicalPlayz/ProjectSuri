@@ -4,7 +4,7 @@ public class Trash1 : MonoBehaviour
 {
     public void Remove(GameObject obj)
     {
-        if (obj.GetComponent<Suri>())
+        if (obj.GetComponent<Suri>() && !obj.GetComponent<Suri>().UnTouched())
         {
             Destroy(obj);
             return;
