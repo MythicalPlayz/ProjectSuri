@@ -309,7 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84079d96fa9a8d4b987a51117b642f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IUIStr
-  str: Tomato
+  str: 
+  isInventory: 1
+  inventoryStr: Tomato
 --- !u!1 &6639448857149132710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9143820922279001373, guid: 2e45a507be9896045bab2c5552f7b0a9, type: 3}

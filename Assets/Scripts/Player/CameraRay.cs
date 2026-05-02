@@ -42,13 +42,13 @@ public class CameraRay : MonoBehaviour
                 IUIStr uiStr = holding.GetComponent<IUIStr>();
                 if (uiStr != null)
                 {
-                    UpdateUI(true, uiStr.str);
+                    UpdateUI(true, uiStr);
                 }
             }
             else
             {
                 holding = null;
-                UpdateUI(false);
+                UpdateUI(false,null);
             }
             UpdateObject();
             if (holding == null)
@@ -65,12 +65,29 @@ public class CameraRay : MonoBehaviour
         gameObject.GetComponent<PlayerInteract>().selectedGameObject = holding;
     }
 
-    void UpdateUI(bool isEnabled,string str = "")
+    void UpdateUI(bool isEnabled,IUIStr iUIStr)
     {
+        string str = "";
+        if (iUIStr == null)
+        {
+            textbox.gameObject.SetActive(false);
+            return;
+        }
+           
+
+        str = iUIStr.str;
+
+        if (iUIStr.isInventory)
+        {
+            InventorySystem k = GameObject.FindAnyObjectByType<InventorySystem>();
+            str += "\n" + iUIStr.inventoryStr + " (" + k.GetIngredientCount(iUIStr.inventoryStr) + ")";
+        }
+
         if (isEnabled)
         {
             textbox.text = str;
             textbox.gameObject.SetActive(true);
+            Debug.Log(str);
         }
         else
         {

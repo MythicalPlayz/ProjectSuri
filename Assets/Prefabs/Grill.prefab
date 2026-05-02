@@ -5069,19 +5069,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.0707128
+      value: -8.992
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1399999
+      value: 2.8379998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.77559
+      value: 5.566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5089,7 +5089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalRotation.z
@@ -5101,7 +5101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -5146,6 +5146,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
       insertIndex: -1
       addedObject: {fileID: -778423654111653234}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5156234998756598653}
   m_SourcePrefab: {fileID: 100100000, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}
 --- !u!1 &2853483703527285326 stripped
 GameObject:
@@ -5348,6 +5351,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IUIStr
   str: Grill Suri
+  isInventory: 0
+  inventoryStr: 
+--- !u!114 &5156234998756598653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891190916967729926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfa3852f7af5b14f9907d96f225d668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleMusic
+  type: 1
 --- !u!1 &8391810006285643694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7694400819410314759, guid: e090a22be3f2a6f40a03034ec9c2e808, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public float timer = 300f;
     public bool isGameActive = true;
+    public bool isGameOver = false;
     public float money = 100f;
 
     public Animator ramsisAnimator;
@@ -27,8 +29,9 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera;
     public Camera ramsisCamera;
 
-    private InputAction pause;
-    private bool isPaused = false;
+    public bool isPaused = false;
+    public AudioSource lofi;
+    public int highScore = 0;
 
     public enum InteractableType
     {
@@ -93,7 +96,8 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         uiManager = GameObject.FindFirstObjectByType<UiManager>();
         audioSource = GetComponent<AudioSource>();
-        pause = InputSystem.actions.FindAction("Pause");
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        timer = PlayerPrefs.GetInt("GameTime", 300);
     }
 
     public void UpdateScore(int score)
@@ -121,46 +125,49 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         UpdateTimer();
+    }
 
-        // 1. Get the input
-        bool pauseValue = pause.WasPressedThisFrame();
-
-        // 2. Only check for the button press here
-        if (pauseValue)
+    public void PauseGame(bool pause)
+    {
+        if (pause)
         {
-            if (isPaused)
-            {
-                // Unpause logic
-                uiManager.ChangePause(false);
-                isPaused = false;
-                Time.timeScale = 1f;
-
-                // Re-enable game logic if needed
-                isGameActive = true;
-            }
-            else if (isGameActive) // Only allow pausing if the game is actually running
-            {
-                // Pause logic
-                uiManager.ChangePause(true);
-                isPaused = true;
-                Time.timeScale = 0f;
-
-                // Typically you keep isGameActive true so logic knows 
-                // the game hasn't ended, OR you handle it like this:
-                isGameActive = false;
-            }
+            isPaused = true;
+            isGameActive = false;
+            Time.timeScale = 0f;
+            lofi.Pause();
+        }
+        else
+        {
+            isPaused = false;
+            isGameActive = true;
+            Time.timeScale = 1f;
+            lofi.UnPause();
         }
     }
 
     public void EndGame()
     {
         isGameActive = false;
+        isGameOver = true;
         // Time.timeScale = 0f;
         mainCamera.gameObject.SetActive(false);
         ramsisCamera.gameObject.SetActive(true);
         uiManager.GameOver();
+        if (money >- 0 && score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+        }
+        lofi.Stop();
+        StartCoroutine(Wait5Sec());
+    }
+
+    IEnumerator Wait5Sec()
+    {
+        yield return new WaitForSecondsRealtime(5);
         uiManager.DisplayRamsisMessage(GetRamsisMessage());
     }
+
 
     private string GetRamsisMessage()
     {
@@ -188,7 +195,7 @@ public class GameManager : MonoBehaviour
         else 
         {
             ramsisAnimator.SetInteger("AnimationType", 1);
-            return "Golden Ramsis: ARE YOU A F%#KING IDIOT SURI!\n NOT A SINGLE CUSTOMER YOU GOT RIGHT!";
+            return "Golden Ramsis: ARE YOU A F%#KING IDIOT SURI!\n TERRIBLE SCORE\nGET OUT!";
         }
             
     }

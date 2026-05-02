@@ -9,7 +9,7 @@ public class QueueManager : MonoBehaviour
     // Call this to add an agent to the line
     public void JoinLine(GameObject agent)
     {
-        if (agentsInLine.Count < queueSpots.Length)
+        if (agentsInLine.Count < queueSpots.Length - 1)
         {
             agentsInLine.Add(agent);
             UpdateLinePositions();
@@ -17,7 +17,7 @@ public class QueueManager : MonoBehaviour
         else
         {
             Debug.Log("The line is full!");
-            Destroy(agent); // Or handle it however you want (e.g., make them wait outside the line)
+            agent.gameObject.GetComponent<Customer>().state = 4;
         }
     }
 
@@ -44,5 +44,10 @@ public class QueueManager : MonoBehaviour
             // Tell them to walk to their designated spot
             navAgent.SetDestination(queueSpots[i].position);
         }
+    }
+
+    public GameObject StartLine()
+    {
+        return queueSpots[queueSpots.Length - 1].gameObject;
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8402843778249396029}
   - component: {fileID: 2641024938629239301}
   - component: {fileID: 3910779518224712890}
+  - component: {fileID: 4474768551289688599}
   m_Layer: 0
   m_Name: L2
   m_TagString: Untagged
@@ -166,6 +167,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4474768551289688599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644532594869660950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfa3852f7af5b14f9907d96f225d668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleMusic
+  type: 1
 --- !u!1 &5692182220571110166
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +192,7 @@ GameObject:
   - component: {fileID: 3818616894769273223}
   - component: {fileID: 193100827697367740}
   - component: {fileID: 5880980013483692732}
+  - component: {fileID: 2794333790240017019}
   m_Layer: 0
   m_Name: L1
   m_TagString: Untagged
@@ -332,6 +347,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2794333790240017019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692182220571110166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfa3852f7af5b14f9907d96f225d668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleMusic
+  type: 1
 --- !u!1 &8797124972414368259
 GameObject:
   m_ObjectHideFlags: 0
@@ -10148,15 +10176,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.009
+      value: -11.255
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.155
+      value: 2.448
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.39
+      value: 5.592
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10340,6 +10368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IUIStr
   str: Fry Frozen Food
+  isInventory: 0
+  inventoryStr: 
 --- !u!4 &5444534504377484908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfb887d659d71f3479764f1b3afc4576, type: 3}

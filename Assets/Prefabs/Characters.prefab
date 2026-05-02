@@ -149,10 +149,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78dd8c411ed375443aed7a5c1464651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Customer
-  waitZone: {fileID: 0}
   endZone: {fileID: 0}
   state: 0
   maxWaitTime: 30
+  materials:
+  - {fileID: 2100000, guid: 55167a8fa3d6a6b4f8bf50883b9f35d9, type: 2}
+  - {fileID: 2100000, guid: ab6f3fd864f8a3a49bd8b890d3f81b41, type: 2}
+  - {fileID: 2100000, guid: b17a4394b96cad7419bd29c9cd1415b5, type: 2}
+  - {fileID: 2100000, guid: 7f0373af2df46af448c42c96f17d8b61, type: 2}
+  - {fileID: 2100000, guid: d1dedc42d513d5a45835871fd494eda6, type: 2}
+  - {fileID: 2100000, guid: 6a9861d0fd4cdde47a3d3c0e00f1f7fe, type: 2}
+  - {fileID: 2100000, guid: e578d83887623aa4a8678d03cd25a91e, type: 2}
+  - {fileID: 2100000, guid: 1dc013f2abe245e42a951eae7e4ffc48, type: 2}
+  - {fileID: 2100000, guid: faaba1cbd9f929c40b45a8e690da07c9, type: 2}
 --- !u!195 &-1822101224917368553
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -190,7 +199,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -307,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 6119056087736297040, guid: 1778bc69dfa784848b641c2490b7a69b, type: 3}
       propertyPath: m_Name
       value: BillboardUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119056087736297040, guid: 1778bc69dfa784848b641c2490b7a69b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

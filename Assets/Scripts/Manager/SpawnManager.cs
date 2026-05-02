@@ -6,17 +6,22 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager GameManager;
     public GameObject customerPrefab;
-    public GameObject start;
+    public GameObject npcPrefab;
+    public GameObject[] start;
+    public GameObject end;
+    public float isCustomer = 0.5f;
+    public float delay = 5f;
+    public float spawnInterval = 15f;
 
     void Start()
     {
         GameManager = GameObject.FindAnyObjectByType<GameManager>();
-        InvokeRepeating("SpawnCustomer", 10,30); // Adjusted to use a coroutine method
+        InvokeRepeating("SpawnCustomer", delay,spawnInterval); // Adjusted to use a coroutine method
     }
 
     void Update()
     {
-        if (!GameManager.isGameActive)
+        if (GameManager.isGameOver)
         {
             CancelInvoke("SpawnCustomer"); // Correct way to stop InvokeRepeating
         }
@@ -24,6 +29,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnCustomer()
     {
-        Instantiate(customerPrefab, start.transform.position, Quaternion.identity);
+        
+        Instantiate(customerPrefab, start[Random.Range(0, start.Length)].transform.position, Quaternion.identity);
     }
 }
